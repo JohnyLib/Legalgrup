@@ -18,35 +18,6 @@ import {
 import { useTranslations } from "../../lib/i18n/context";
 import { LocalizedLink } from "../../lib/i18n/link";
 
-const practiceAreas = [
-  {
-    title: "Corporate Advisory",
-    description: "Company structuring, boards, and commercial contracts that keep momentum without loose ends.",
-    icon: <BuildingIcon className="h-6 w-6" />,
-  },
-  {
-    title: "Transactions & M&A",
-    description: "Deal strategy, diligence, and negotiation playbooks to close decisively.",
-    icon: <BriefcaseIcon className="h-6 w-6" />,
-  },
-  {
-    title: "Disputes & Risk",
-    description: "Calm, courtroom-ready teams for urgent filings, arbitration, and settlement design.",
-    icon: <ShieldIcon className="h-6 w-6" />,
-  },
-  {
-    title: "Employment & People",
-    description: "Policies, leadership agreements, and investigations that protect teams and reputation.",
-    icon: <UsersIcon className="h-6 w-6" />,
-  },
-  {
-    title: "Regulatory & Licensing",
-    description: "Licensing packs, regulator dialogue, and cross-border compliance built with clarity.",
-    icon: <GlobeIcon className="h-6 w-6" />,
-  },
-];
-
-
 export default function HomePage() {
   const { t } = useTranslations();
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
@@ -87,7 +58,7 @@ export default function HomePage() {
 
 function Hero({ onBookConsultation }: { onBookConsultation: () => void }) {
   const { t } = useTranslations();
-
+  const achievements = t.home.results.items;
   return (
     <section
       className="relative mt-8 overflow-hidden rounded-[32px] border border-[#efe5d4] bg-white shadow-[0_22px_60px_rgba(15,23,42,0.12)]"
@@ -178,20 +149,14 @@ function Hero({ onBookConsultation }: { onBookConsultation: () => void }) {
               
               {/* Достижения */}
               <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-xs uppercase tracking-[0.16em] text-white/70 mb-3">Key Achievements</p>
+                <p className="text-xs uppercase tracking-[0.16em] text-white/70 mb-3">{t.home.results.subtitle}</p>
                 <div className="space-y-2 text-sm text-white/90">
-                  <div className="flex items-start gap-2">
-                    <CheckIcon className="h-4 w-4 text-[#ffd699] mt-0.5 shrink-0" />
-                    <span>Deals closed in 45 days with zero post-close claims</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckIcon className="h-4 w-4 text-[#ffd699] mt-0.5 shrink-0" />
-                    <span>Arbitration victories in cross-border disputes</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckIcon className="h-4 w-4 text-[#ffd699] mt-0.5 shrink-0" />
-                    <span>Emergency filings secured within 48 hours</span>
-                  </div>
+                  {achievements.map((item) => (
+                    <div key={item} className="flex items-start gap-2">
+                      <CheckIcon className="h-4 w-4 text-[#ffd699] mt-0.5 shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -204,6 +169,8 @@ function Hero({ onBookConsultation }: { onBookConsultation: () => void }) {
 
 function PracticeAreas() {
   const { t } = useTranslations();
+  const icons = [BuildingIcon, BriefcaseIcon, ShieldIcon, UsersIcon, GlobeIcon];
+  const areas = t.home.practiceAreas.items;
 
   return (
     <section
@@ -226,14 +193,16 @@ function PracticeAreas() {
         </LocalizedLink>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {practiceAreas.map((area) => (
+        {areas.map((area, idx) => {
+          const Icon = icons[idx % icons.length];
+          return (
           <div
             key={area.title}
             className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#efe5d4] bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(15,23,42,0.12)]"
           >
             <div className="absolute right-[-12px] top-[-12px] h-24 w-24 rounded-full bg-[#f3eadc] opacity-0 transition duration-200 group-hover:opacity-100" />
             <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-[#f3eadc] text-[#8b5e2b] shadow-inner">
-              {area.icon}
+              <Icon className="h-6 w-6" />
             </div>
             <h3 className="relative mt-5 font-display text-xl font-semibold text-[#0f172a]">{area.title}</h3>
             <p className="relative mt-2 text-sm leading-6 text-slate-600">{area.description}</p>
@@ -242,7 +211,8 @@ function PracticeAreas() {
               <ArrowRightIcon className="h-4 w-4 transition group-hover:translate-x-1" />
             </div>
           </div>
-        ))}
+        );
+        })}
       </div>
     </section>
   );
@@ -250,6 +220,8 @@ function PracticeAreas() {
 
 function ResultsAndTestimonials() {
   const { t } = useTranslations();
+  const results = t.home.results.items;
+  const testimonials = t.home.testimonials.items;
 
   return (
     <section
@@ -261,9 +233,9 @@ function ResultsAndTestimonials() {
         <p className="text-xs uppercase tracking-[0.2em] text-slate-500">{t.home.results.subtitle}</p>
         <h3 className="mt-2 font-display text-2xl font-semibold text-[#0f172a]">{t.home.results.title}</h3>
         <div className="mt-6 space-y-4 text-sm text-slate-700">
-          <p>Deal closed in 45 days with zero post-close claims.</p>
-          <p>Arbitration victory in cross-border dispute.</p>
-          <p>Emergency filing secured injunction within 48 hours.</p>
+          {results.map((item) => (
+            <p key={item}>{item}</p>
+          ))}
         </div>
       </div>
       <div
@@ -272,8 +244,9 @@ function ResultsAndTestimonials() {
         <p className="text-xs uppercase tracking-[0.2em] text-slate-500">{t.home.testimonials.subtitle}</p>
         <h3 className="mt-2 font-display text-2xl font-semibold text-[#0f172a]">{t.home.testimonials.title}</h3>
         <div className="mt-6 space-y-4 text-sm text-slate-700">
-          <p>"Clear strategy, fast execution, calm under pressure." - Founder, Tech Company</p>
-          <p>"They got us to closing faster than we expected." - CEO, PE Fund</p>
+          {testimonials.map((item) => (
+            <p key={item}>{item}</p>
+          ))}
         </div>
       </div>
     </section>
@@ -332,6 +305,7 @@ function TeamSection() {
 
 function ConsultationCTA({ onBookConsultation }: { onBookConsultation: () => void }) {
   const { t } = useTranslations();
+  const cta = t.home.consultationCta;
 
   return (
     <section
@@ -340,18 +314,11 @@ function ConsultationCTA({ onBookConsultation }: { onBookConsultation: () => voi
       <div className="relative grid gap-10 px-6 py-10 md:grid-cols-[1.05fr_0.95fr] md:px-12 md:py-14">
         <div className="absolute right-[-120px] top-[-80px] h-72 w-72 rounded-full bg-[#f3eadc] blur-3xl" />
         <div className="relative space-y-5">
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Next step</p>
-          <h3 className="font-display text-3xl font-semibold text-[#0f172a]">Tell us what you need this week.</h3>
-          <p className="text-base text-slate-600">
-            We respond with a short plan, budget range, and available partner times. Urgent filings get priority.
-          </p>
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">{cta.eyebrow}</p>
+          <h3 className="font-display text-3xl font-semibold text-[#0f172a]">{cta.title}</h3>
+          <p className="text-base text-slate-600">{cta.description}</p>
           <div className="grid gap-3 sm:grid-cols-2">
-            {[
-              t.contact.hero.responseUnder24h,
-              t.contact.hero.partnerLedIntake,
-              t.contact.hero.confidentialHandling,
-              "Clear next steps",
-            ].map((item) => (
+            {cta.bullets.map((item) => (
               <div
                 key={item}
                 className="flex items-center gap-3 rounded-2xl border border-[#f1e6d7] bg-[#fdfaf5] px-4 py-3 text-sm font-semibold text-[#0f172a]"
@@ -366,14 +333,14 @@ function ConsultationCTA({ onBookConsultation }: { onBookConsultation: () => voi
           <div className="absolute inset-0 translate-x-5 translate-y-5 rounded-[28px] bg-[#e0d7c8] opacity-50 blur-3xl" />
           <div className="relative space-y-4 rounded-[28px] border border-[#f1e6d7] bg-white p-6 shadow-[0_18px_44px_rgba(15,23,42,0.1)]">
             <div>
-              <p className="text-xs uppercase tracking-[0.16em] text-slate-500">Direct line</p>
-              <h4 className="font-display text-xl font-semibold text-[#0f172a]">We prepare before we meet.</h4>
+              <p className="text-xs uppercase tracking-[0.16em] text-slate-500">{cta.eyebrow}</p>
+              <h4 className="font-display text-xl font-semibold text-[#0f172a]">{cta.lineTitle}</h4>
             </div>
             <button
               onClick={onBookConsultation}
               className="w-full rounded-full bg-[#0f172a] px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(15,23,42,0.25)] transition hover:-translate-y-px hover:shadow-[0_18px_38px_rgba(15,23,42,0.3)]"
             >
-              {t.home.hero.bookConsultation}
+              {cta.lineCta}
             </button>
           </div>
         </div>

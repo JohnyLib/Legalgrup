@@ -53,20 +53,69 @@ export const en: TranslationKeys = {
       title: "Counsel designed for modern businesses.",
       description: "Multidisciplinary teams that move quickly across corporate, dispute, and regulatory challenges with a single point of accountability.",
       viewAllServices: "View all services",
+      items: [
+        {
+          title: "Corporate Advisory",
+          description: "Company structuring, boards, and commercial contracts that keep momentum without loose ends.",
+        },
+        {
+          title: "Transactions & M&A",
+          description: "Deal strategy, diligence, and negotiation playbooks to close decisively.",
+        },
+        {
+          title: "Disputes & Risk",
+          description: "Calm, courtroom-ready teams for urgent filings, arbitration, and settlement design.",
+        },
+        {
+          title: "Employment & People",
+          description: "Policies, leadership agreements, and investigations that protect teams and reputation.",
+        },
+        {
+          title: "Regulatory & Licensing",
+          description: "Licensing packs, regulator dialogue, and cross-border compliance built with clarity.",
+        },
+      ],
     },
     results: {
       subtitle: "Selected matters",
       title: "Quiet victories, decisive outcomes.",
+      items: [
+        "Deal closed in 45 days with zero post-close claims.",
+        "Arbitration victory in cross-border dispute.",
+        "Emergency filing secured injunction within 48 hours.",
+      ],
     },
     testimonials: {
       subtitle: "Client voices",
       title: "Clarity, speed, and calm in critical moments.",
+      items: [
+        "\"Clear strategy, fast execution, calm under pressure.\" - Founder, Tech Company",
+        "\"They got us to closing faster than we expected.\" - CEO, PE Fund",
+      ],
     },
     team: {
       subtitle: "Leadership Team",
       title: "Experienced partners leading your matters.",
       description: "Our partners bring decades of combined experience across corporate law, disputes, and regulatory matters.",
       viewAllAttorneys: "View all attorneys",
+      members: [
+        { name: "Adrian Santoso", role: "Managing Partner", focus: "Corporate, M&A, board governance" },
+        { name: "Mira Lestari", role: "Partner", focus: "Disputes, arbitration, crisis response" },
+        { name: "Davin Lee", role: "Partner", focus: "Employment, investigations, compliance" },
+      ],
+    },
+    consultationCta: {
+      eyebrow: "Next step",
+      title: "Tell us what you need this week.",
+      description: "We respond with a short plan, budget range, and available partner times. Urgent filings get priority.",
+      bullets: [
+        "Response in < 24h",
+        "Partner-led intake",
+        "Confidential handling",
+        "Clear next steps",
+      ],
+      lineTitle: "We prepare before we meet.",
+      lineCta: "Book a consultation",
     },
   },
   services: {
@@ -88,6 +137,62 @@ export const en: TranslationKeys = {
       description: "Partner-led pods combine corporate, disputes, and regulatory depth with fast decision cycles.",
       clearSLAs: "Clear SLAs & budgets",
       scheduleConsultation: "Schedule consultation",
+      items: [
+        {
+          title: "Corporate Advisory",
+          description: "Company structuring, boards, and commercial contracts that keep momentum without loose ends.",
+          bullets: [
+            "Governance, board packs, and delegations",
+            "Commercial contracts with fast turnaround",
+            "Risk mapping for new markets",
+          ],
+        },
+        {
+          title: "Transactions & M&A",
+          description: "Deal strategy, diligence, and negotiation playbooks to close decisively.",
+          bullets: [
+            "Term sheets, SPA/SSA, and conditions",
+            "Dataroom prep and Q&A sweeps",
+            "Closing checklists and signing room",
+          ],
+        },
+        {
+          title: "Disputes & Risk",
+          description: "Calm, courtroom-ready teams for urgent filings, arbitration, and settlement design.",
+          bullets: [
+            "Emergency relief and filings",
+            "Evidence, experts, and witness prep",
+            "Negotiation and mediated outcomes",
+          ],
+        },
+        {
+          title: "Employment & People",
+          description: "Policies, leadership agreements, and investigations that protect teams and reputation.",
+          bullets: [
+            "Hiring and leadership contracts",
+            "Policies, audits, and compliance",
+            "Sensitive exits and investigations",
+          ],
+        },
+        {
+          title: "Regulatory & Licensing",
+          description: "Licensing packs, regulator dialogue, and cross-border compliance built with clarity.",
+          bullets: [
+            "Regulatory mapping and authorities",
+            "Licensing submissions and follow-ups",
+            "Data and privacy frameworks",
+          ],
+        },
+        {
+          title: "Private Client & Wealth",
+          description: "Succession, trusts, and protection structures for founders and families.",
+          bullets: [
+            "Wealth and estate strategies",
+            "Trusts, wills, and governance",
+            "Family business continuity",
+          ],
+        },
+      ],
     },
     programs: {
       subtitle: "Engagement programs",
@@ -95,6 +200,47 @@ export const en: TranslationKeys = {
       description: "Predictable cadences, clear scopes, and quick response windows.",
       noHiddenFees: "No hidden fees",
       viewScopeTimeline: "View scope & timeline",
+      list: [
+        {
+          name: "General Counsel Desk",
+          badge: "Monthly",
+          price: "From $3,800/mo",
+          notes: ["Weekly legal desk", "<48h contract turnaround", "Founder hotline"],
+        },
+        {
+          name: "Deal Sprint",
+          badge: "Project",
+          price: "Scope-based",
+          notes: ["Thesis, timeline, and checklists", "Redlines and negotiation room", "Closing orchestration"],
+        },
+        {
+          name: "Disputes Response",
+          badge: "Hybrid",
+          price: "Monthly + success",
+          notes: ["Emergency filings in 48h", "Evidence and witness prep", "Settlement scenarios"],
+        },
+      ],
+    },
+    coverage: {
+      subtitle: "Coverage",
+      title: "What we handle this quarter",
+      tags: ["Corporate & commercial", "Transactions & fundraising", "Disputes & arbitration", "Employment & compliance"],
+      availabilityLabel: "Availability this week",
+      slotCta: "Reserve a slot",
+      slots: ["Tuesday - 09:00", "Wednesday - 16:00", "Thursday - 11:30", "Friday - 14:00"],
+    },
+    photos: {
+      subtitle: "Media",
+      title: "Visuals for your services.",
+      description: "Add service photos, client sessions, or team workshops into these slots.",
+      items: ["Client briefing", "Workshop", "Team strategy"],
+    },
+    cta: {
+      subtitle: "Next step",
+      title: "Ready for decisive support.",
+      description: "Tell us what you need. We’ll assemble the right pod and confirm timing.",
+      bullets: ["Response in < 24h", "Partner-led pod", "Clear scope and budget", "No hidden fees"],
+      button: "Book services call",
     },
   },
   attorneys: {
@@ -105,16 +251,57 @@ export const en: TranslationKeys = {
       mattersYearly: "Matters yearly",
       courtAppearances: "Court appearances",
       avgResponse: "Avg. response",
+      principles: [
+        "Partner in the room for every critical decision.",
+        "Written strategy memos with options and budgets upfront.",
+        "Calm, direct communication with leadership cadence.",
+        "Tight collaboration with finance, HR, and product teams.",
+      ],
     },
     team: {
       subtitle: "Team",
       title: "A multidisciplinary bench.",
       description: "Partner attention with pods that mirror your business squads.",
       directPartnerAccess: "Direct partner access",
+      members: [
+        { name: "Adrian Santoso", role: "Managing Partner", focus: "Corporate, M&A, board governance", matters: "320+ matters led" },
+        { name: "Mira Lestari", role: "Partner", focus: "Disputes, arbitration, crisis response", matters: "200+ court appearances" },
+        { name: "Davin Lee", role: "Partner", focus: "Employment, investigations, compliance", matters: "150+ investigations" },
+        { name: "Serena Ng", role: "Counsel", focus: "Technology, data, and licensing", matters: "12 markets covered" },
+        { name: "Rendra Wijaya", role: "Senior Associate", focus: "Transactions and commercial", matters: "60+ deal cycles" },
+        { name: "Nadia Rahma", role: "Senior Associate", focus: "Disputes & enforcement", matters: "80+ hearings" },
+      ],
     },
     approach: {
       subtitle: "Approach",
       title: "How we work with you",
+      items: [
+        "Partner attends key calls and negotiations.",
+        "Weekly status with next decisions and blockers.",
+        "Clear budgets with variance alerts.",
+        "Playbooks for repeatable processes.",
+      ],
+      experienceTitle: "Quiet victories, decisive outcomes",
+      experienceDescription: "Deals closed in 45 days, 0 post-close claims, and courtroom teams ready for emergency filings.",
+      experienceBullets: [
+        "M&A, PE, and growth deals",
+        "Arbitration & complex disputes",
+        "Employment & investigations",
+        "Regulatory & licensing",
+      ],
+    },
+    photos: {
+      subtitle: "Media",
+      title: "Add team visuals.",
+      description: "Portraits, courtroom, workshops.",
+      items: ["Leadership", "Courtroom", "Workshop"],
+    },
+    cta: {
+      subtitle: "Schedule",
+      title: "Talk to a partner this week.",
+      description: "Share your matter and we’ll propose a plan, timeline, and budget range.",
+      button: "Schedule a call",
+      notes: ["Response in <24h", "Partner on intake", "Confidential handling"],
     },
   },
   insights: {
@@ -231,6 +418,37 @@ export const en: TranslationKeys = {
       privacyAgreement: "I agree to the privacy policy.",
       submit: "Send my request",
       success: "Thank you! We'll contact you within 24 hours.",
+      validation: {
+        nameRequired: "Name is required",
+        emailRequired: "Email is required",
+        emailInvalid: "Invalid email format",
+        phoneRequired: "Phone is required",
+        matterRequired: "Matter description is required",
+        privacyRequired: "You must agree to the privacy policy",
+      },
+      placeholders: {
+        fullName: "Your name",
+        company: "Company or organization",
+        email: "you@company.com",
+        phone: "+62 812 3456 7890",
+        matterSummary: "Please describe your legal matter, timeline, and desired outcome...",
+        matterType: "Select matter type",
+        matterTypeOptions: {
+          corporate: "Corporate & Commercial",
+          mna: "Mergers & Acquisitions",
+          disputes: "Disputes & Litigation",
+          employment: "Employment & Compliance",
+          regulatory: "Regulatory Advisory",
+          private: "Private Clients",
+          other: "Other",
+        },
+      },
+      status: {
+        submitting: "Submitting...",
+        submit: "Submit Request",
+        successTitle: "Sent successfully",
+        successClose: "Close",
+      },
     },
     contact: {
       title: "Contact Us",
@@ -241,6 +459,23 @@ export const en: TranslationKeys = {
       message: "Message",
       submit: "Send",
       success: "Thank you for your message! We'll get back to you soon.",
+      validation: {
+        nameRequired: "Name is required",
+        emailRequired: "Email is required",
+        emailInvalid: "Invalid email format",
+        messageRequired: "Message is required",
+        privacyRequired: "You must agree to the privacy policy",
+      },
+      placeholders: {
+        fullName: "Your name",
+        email: "you@company.com",
+        phone: "+62 812 3456 7890",
+        message: "How can we help you?",
+      },
+      status: {
+        sending: "Sending...",
+        submit: "Send Message",
+      },
     },
     newsletter: {
       title: "Subscribe to Newsletter",
@@ -258,6 +493,16 @@ export const en: TranslationKeys = {
       problemDescriptionPlaceholder: "Please describe your problem or question...",
       submit: "Schedule Call",
       success: "Thank you! We'll contact you within 24 hours to schedule a call.",
+      validation: {
+        fullNameRequired: "Full name is required",
+        phoneRequired: "Phone is required",
+        problemDescriptionRequired: "Problem description is required",
+      },
+      status: {
+        submitting: "Submitting...",
+        successTitle: "Sent successfully",
+        successClose: "Close",
+      },
     },
   },
 };

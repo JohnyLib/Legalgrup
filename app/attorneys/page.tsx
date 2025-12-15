@@ -91,10 +91,10 @@ export default function AttorneysPage() {
         size="lg"
       >
         <ScheduleCallForm
+          source="Schedule a Call"
           onSubmit={(data) => {
             console.log("Schedule call form submitted:", data);
-            setIsScheduleCallOpen(false);
-            alert("Thank you! We'll contact you within 24 hours to schedule a call.");
+            // Success handled inside the form with overlay
           }}
         />
       </Modal>

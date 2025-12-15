@@ -5,11 +5,80 @@ import { motion } from "framer-motion";
 import { Field } from "./SiteChrome";
 import { useTranslations } from "../../lib/i18n/context";
 
-interface ConsultationFormProps {
-  onSubmit?: (data: any) => void;
+type StatusState = { type: "success" | "error"; text: string } | null;
+
+async function sendLead(body: {
+  name?: string;
+  phone?: string;
+  email?: string;
+  message: string;
+  source?: string;
+}) {
+  const res = await fetch("/api/lead", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      ...body,
+      pageUrl: typeof window !== "undefined" ? window.location.href : undefined,
+      userAgent: typeof navigator !== "undefined" ? navigator.userAgent : undefined,
+    }),
+  });
+
+  const text = await res.text();
+  let data: any = {};
+  if (text) {
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = {};
+    }
+  }
+  if (!res.ok) {
+    throw new Error(data?.error || `Request failed (${res.status})`);
+  }
+  return data;
 }
 
-export function ConsultationForm({ onSubmit }: ConsultationFormProps) {
+function SuccessOverlay({ onClose, title, text }: { onClose: () => void; title: string; text: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="absolute inset-0 z-10 flex items-center justify-center bg-white/80 backdrop-blur"
+    >
+      <motion.div
+        initial={{ scale: 0.96, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 240, damping: 18 }}
+        className="w-full max-w-sm rounded-2xl border border-emerald-200 bg-white p-6 shadow-2xl"
+      >
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+          <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+        <div className="mt-4 text-center">
+          <div className="text-lg font-semibold text-slate-900">{title}</div>
+          <div className="mt-2 text-sm text-slate-700">{text}</div>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="mt-6 w-full rounded-xl bg-[#0f172a] px-4 py-2 text-sm font-semibold text-white shadow hover:-translate-y-[1px] hover:shadow-md transition"
+        >
+          Закрыть
+        </button>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+interface ConsultationFormProps {
+  onSubmit?: (data: any) => void;
+  source?: string;
+}
+
+export function ConsultationForm({ onSubmit, source }: ConsultationFormProps) {
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -22,6 +91,7 @@ export function ConsultationForm({ onSubmit }: ConsultationFormProps) {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<StatusState>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -55,29 +125,44 @@ export function ConsultationForm({ onSubmit }: ConsultationFormProps) {
     e.preventDefault();
     if (!validate()) return;
 
+    setStatus(null);
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    if (onSubmit) {
-      onSubmit(formData);
+    const messageParts = [
+      formData.matter.trim() ? `Matter: ${formData.matter.trim()}` : null,
+      formData.company.trim() ? `Company: ${formData.company.trim()}` : null,
+      formData.urgency.trim() ? `Matter type: ${formData.urgency.trim()}` : null,
+    ].filter(Boolean);
+
+    try {
+      await sendLead({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        email: formData.email.trim(),
+        message: messageParts.join("\n"),
+        source: source || "Consultation form",
+      });
+      if (onSubmit) {
+        onSubmit(formData);
+      }
+      setStatus({ type: "success", text: "Ждите ответ от нашей компании" });
+      setFormData({
+        name: "",
+        company: "",
+        email: "",
+        phone: "",
+        matter: "",
+        urgency: "",
+        privacy: false,
+      });
+    } catch (err: any) {
+      setStatus({ type: "error", text: err?.message || "Failed to send. Please try again." });
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    setIsSubmitting(false);
-    // Reset form
-    setFormData({
-      name: "",
-      company: "",
-      email: "",
-      phone: "",
-      matter: "",
-      urgency: "",
-      privacy: false,
-    });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="relative space-y-6">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <Field
@@ -200,6 +285,18 @@ export function ConsultationForm({ onSubmit }: ConsultationFormProps) {
           {isSubmitting ? "Submitting..." : "Submit Request"}
         </button>
       </div>
+      {status?.type === "error" && (
+        <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+          {status.text}
+        </div>
+      )}
+      {status?.type === "success" && (
+        <SuccessOverlay
+          title="Успешно отправлено"
+          text={status.text}
+          onClose={() => setStatus(null)}
+        />
+      )}
     </form>
   );
 }
@@ -362,9 +459,10 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
 
 interface ScheduleCallFormProps {
   onSubmit?: (data: any) => void;
+  source?: string;
 }
 
-export function ScheduleCallForm({ onSubmit }: ScheduleCallFormProps) {
+export function ScheduleCallForm({ onSubmit, source }: ScheduleCallFormProps) {
   const { t } = useTranslations();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -374,6 +472,7 @@ export function ScheduleCallForm({ onSubmit }: ScheduleCallFormProps) {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<StatusState>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -401,25 +500,33 @@ export function ScheduleCallForm({ onSubmit }: ScheduleCallFormProps) {
     e.preventDefault();
     if (!validate()) return;
 
+    setStatus(null);
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    if (onSubmit) {
-      onSubmit(formData);
+    try {
+      await sendLead({
+        name: formData.fullName.trim(),
+        phone: formData.phone.trim(),
+        message: formData.problemDescription.trim(),
+        source: source || t.forms.scheduleCall.title,
+      });
+      if (onSubmit) {
+        onSubmit(formData);
+      }
+      setStatus({ type: "success", text: "Ждите ответ от нашей компании" });
+      setFormData({
+        fullName: "",
+        phone: "",
+        problemDescription: "",
+      });
+    } catch (err: any) {
+      setStatus({ type: "error", text: err?.message || "Failed to send. Please try again." });
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    setIsSubmitting(false);
-    // Reset form
-    setFormData({
-      fullName: "",
-      phone: "",
-      problemDescription: "",
-    });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="relative space-y-6">
       <div>
         <Field
           label={t.forms.scheduleCall.fullName}
@@ -474,6 +581,18 @@ export function ScheduleCallForm({ onSubmit }: ScheduleCallFormProps) {
           {isSubmitting ? "Submitting..." : t.forms.scheduleCall.submit}
         </button>
       </div>
+      {status?.type === "error" && (
+        <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+          {status.text}
+        </div>
+      )}
+      {status?.type === "success" && (
+        <SuccessOverlay
+          title="Успешно отправлено"
+          text={status.text}
+          onClose={() => setStatus(null)}
+        />
+      )}
     </form>
   );
 }

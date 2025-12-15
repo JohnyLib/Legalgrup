@@ -139,10 +139,10 @@ export default function ServicesPage() {
         size="lg"
       >
         <ConsultationForm
+          source="Book a Consultation"
           onSubmit={(data) => {
             console.log("Consultation form submitted:", data);
-            setIsConsultationOpen(false);
-            alert("Thank you! We'll contact you within 24 hours.");
+            // Success handled inside the form with overlay
           }}
         />
       </Modal>

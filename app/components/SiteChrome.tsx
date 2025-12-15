@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import type { ReactNode, SVGProps } from "react";
+import HelpWidget from "./HelpWidget";
 import Link from "next/link";
 import { useEffect, useState, useRef, Suspense, lazy } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -18,6 +19,7 @@ export function PageShell({ children }: { children: ReactNode }) {
 
   return (
     <>
+    <HelpWidget />
       <div className="min-h-screen bg-[#f6f3ed] text-slate-900">
         <div className="pointer-events-none fixed inset-0 opacity-60">
           <div className="absolute left-[-10%] top-[-20%] h-[360px] w-[360px] rounded-full bg-[#f0e3cd] blur-3xl" />
@@ -41,10 +43,10 @@ export function PageShell({ children }: { children: ReactNode }) {
           >
             <Suspense fallback={<div className="p-6">Loading...</div>}>
               <ScheduleCallForm
+                source={t.forms.scheduleCall.title}
                 onSubmit={(data) => {
                   console.log("Schedule call form submitted:", data);
-                  setIsScheduleCallOpen(false);
-                  alert(t.forms.scheduleCall.success);
+                  // Success handled inside the form with overlay
                 }}
               />
             </Suspense>

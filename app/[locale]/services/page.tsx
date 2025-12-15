@@ -17,97 +17,6 @@ import {
 } from "../../components/SiteChrome";
 import { useTranslations } from "../../../lib/i18n/context";
 
-const services = [
-  {
-    title: "Corporate Advisory",
-    description:
-      "Company structuring, boards, and commercial contracts that keep momentum without loose ends.",
-    icon: <BuildingIcon className="h-6 w-6" />,
-    bullets: [
-      "Governance, board packs, and delegations",
-      "Commercial contracts with fast turnaround",
-      "Risk mapping for new markets",
-    ],
-  },
-  {
-    title: "Transactions & M&A",
-    description:
-      "Deal strategy, diligence, and negotiation playbooks to close decisively.",
-    icon: <BriefcaseIcon className="h-6 w-6" />,
-    bullets: [
-      "Term sheets, SPA/SSA, and conditions",
-      "Dataroom prep and Q&A sweeps",
-      "Closing checklists and signing room",
-    ],
-  },
-  {
-    title: "Disputes & Risk",
-    description:
-      "Calm, courtroom-ready teams for urgent filings, arbitration, and settlement design.",
-    icon: <ShieldIcon className="h-6 w-6" />,
-    bullets: [
-      "Emergency relief and filings",
-      "Evidence, experts, and witness prep",
-      "Negotiation and mediated outcomes",
-    ],
-  },
-  {
-    title: "Employment & People",
-    description:
-      "Policies, leadership agreements, and investigations that protect teams and reputation.",
-    icon: <UsersIcon className="h-6 w-6" />,
-    bullets: [
-      "Hiring and leadership contracts",
-      "Policies, audits, and compliance",
-      "Sensitive exits and investigations",
-    ],
-  },
-  {
-    title: "Regulatory & Licensing",
-    description:
-      "Licensing packs, regulator dialogue, and cross-border compliance built with clarity.",
-    icon: <GlobeIcon className="h-6 w-6" />,
-    bullets: [
-      "Regulatory mapping and authorities",
-      "Licensing submissions and follow-ups",
-      "Data and privacy frameworks",
-    ],
-  },
-  {
-    title: "Private Client & Wealth",
-    description:
-      "Succession, trusts, and protection structures for founders and families.",
-    icon: <ScaleIcon className="h-6 w-6" />,
-    bullets: [
-      "Wealth and estate strategies",
-      "Trusts, wills, and governance",
-      "Family business continuity",
-    ],
-  },
-];
-
-const programs = [
-  {
-    name: "General Counsel Desk",
-    badge: "Monthly",
-    price: "From $3,800/mo",
-    notes: ["Weekly legal desk", "<48h contract turnaround", "Founder hotline"],
-  },
-  {
-    name: "Deal Sprint",
-    badge: "Project",
-    price: "Scope-based",
-    notes: ["Thesis, timeline, and checklists", "Redlines and negotiation room", "Closing orchestration"],
-  },
-  {
-    name: "Disputes Response",
-    badge: "Hybrid",
-    price: "Monthly + success",
-    notes: ["Emergency filings in 48h", "Evidence and witness prep", "Settlement scenarios"],
-  },
-];
-
-
 export default function ServicesPage() {
   const { t } = useTranslations();
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
@@ -132,10 +41,10 @@ export default function ServicesPage() {
           >
             <Suspense fallback={<div className="p-6">Loading...</div>}>
               <ConsultationForm
+                source={t.forms.consultation.title}
                 onSubmit={(data) => {
                   console.log("Consultation form submitted:", data);
-                  setIsConsultationOpen(false);
-                  alert(t.forms.consultation.success);
+                  // Success handled inside the form with overlay
                 }}
               />
             </Suspense>
@@ -148,6 +57,7 @@ export default function ServicesPage() {
 
 function ServicesHero({ onBookConsultation }: { onBookConsultation: () => void }) {
   const { t } = useTranslations();
+  const coverage = t.services.coverage;
   
   return (
     <section
@@ -184,7 +94,7 @@ function ServicesHero({ onBookConsultation }: { onBookConsultation: () => void }
                 {[0, 1, 2].map((i) => (
                   <span
                     key={i}
-                    className="relative -ml-2 h-8 w-8 overflow-hidden rounded-full border-2 border-white bg-gradient-to-tr from-[#f2e5ce] to-[#d3c2a3]"
+                    className="relative -ml-2 h-8 w-8 overflow-hidden rounded-full border-2 border-white bg-linear-to-tr from-[#f2e5ce] to-[#d3c2a3]"
                   />
                 ))}
               </div>
@@ -220,20 +130,15 @@ function ServicesHero({ onBookConsultation }: { onBookConsultation: () => void }
             <div className="relative space-y-6 p-8 sm:p-10">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.18em] text-white/60">Coverage</p>
-                  <h3 className="font-display text-2xl font-semibold">What we handle this quarter</h3>
+                  <p className="text-xs uppercase tracking-[0.18em] text-white/60">{coverage.subtitle}</p>
+                  <h3 className="font-display text-2xl font-semibold">{coverage.title}</h3>
                 </div>
                 <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/10">
                   <BriefcaseIcon className="h-6 w-6 text-[#ffd699]" />
                 </div>
               </div>
               <div className="grid gap-3 text-sm text-white/80">
-                {[
-                  "Corporate & commercial",
-                  "Transactions & fundraising",
-                  "Disputes & arbitration",
-                  "Employment & compliance",
-                ].map((item) => (
+                {coverage.tags.map((item) => (
                   <div
                     key={item}
                     className="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 ring-1 ring-white/10"
@@ -245,17 +150,18 @@ function ServicesHero({ onBookConsultation }: { onBookConsultation: () => void }
               </div>
               <div className="grid gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/80">
                 <div className="flex items-center justify-between text-white">
-                  <span className="text-xs uppercase tracking-[0.16em] text-white/70">Availability this week</span>
-                  <span className="rounded-full bg-[#ffd699] px-3 py-1 text-xs font-semibold text-[#0f172a]">4 partner slots</span>
+                  <span className="text-xs uppercase tracking-[0.16em] text-white/70">{coverage.availabilityLabel}</span>
+                  <span className="rounded-full bg-[#ffd699] px-3 py-1 text-xs font-semibold text-[#0f172a]">{coverage.slotCta}</span>
                 </div>
                 <div className="grid gap-2 sm:grid-cols-2">
-                  <span className="rounded-xl bg-white/5 px-3 py-2">Tuesday - 09:00</span>
-                  <span className="rounded-xl bg-white/5 px-3 py-2">Wednesday - 16:00</span>
-                  <span className="rounded-xl bg-white/5 px-3 py-2">Thursday - 11:30</span>
-                  <span className="rounded-xl bg-white/5 px-3 py-2">Friday - 14:00</span>
+                  {coverage.slots.map((slot) => (
+                    <span key={slot} className="rounded-xl bg-white/5 px-3 py-2">
+                      {slot}
+                    </span>
+                  ))}
                 </div>
                 <button className="mt-1 inline-flex w-full items-center justify-center rounded-full bg-white px-4 py-3 text-sm font-semibold text-[#0f172a] transition hover:-translate-y-px hover:shadow-lg">
-                  Reserve a slot
+                  {coverage.slotCta}
                 </button>
               </div>
             </div>
@@ -268,6 +174,8 @@ function ServicesHero({ onBookConsultation }: { onBookConsultation: () => void }
 
 function ServiceGrid() {
   const { t } = useTranslations();
+  const icons = [BuildingIcon, BriefcaseIcon, ShieldIcon, UsersIcon, GlobeIcon, ScaleIcon];
+  const services = t.services.grid.items;
 
   return (
     <section
@@ -284,14 +192,16 @@ function ServiceGrid() {
         <div className="rounded-full bg-[#f3eadc] px-4 py-2 text-sm font-semibold text-[#8b5e2b]">{t.services.grid.clearSLAs}</div>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {services.map((service) => (
+        {services.map((service, idx) => {
+          const Icon = icons[idx % icons.length];
+          return (
           <div
             key={service.title}
             className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#efe5d4] bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(15,23,42,0.12)]"
           >
             <div className="absolute right-[-12px] top-[-12px] h-24 w-24 rounded-full bg-[#f3eadc] opacity-0 transition duration-200 group-hover:opacity-100" />
             <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-[#f3eadc] text-[#8b5e2b] shadow-inner">
-              {service.icon}
+              <Icon className="h-6 w-6" />
             </div>
             <h3 className="relative mt-5 font-display text-xl font-semibold text-[#0f172a]">{service.title}</h3>
             <p className="relative mt-2 text-sm leading-6 text-slate-600">{service.description}</p>
@@ -308,7 +218,8 @@ function ServiceGrid() {
               <ArrowRightIcon className="h-4 w-4 transition group-hover:translate-x-1" />
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
@@ -316,6 +227,7 @@ function ServiceGrid() {
 
 function Programs() {
   const { t } = useTranslations();
+  const programs = t.services.programs.list;
 
   return (
     <section
@@ -363,55 +275,27 @@ function Programs() {
 }
 
 function PhotoSlots() {
+  const { t } = useTranslations();
+  const photos = t.services.photos;
   return (
     <section
       className="mt-16 space-y-8"
     >
       <div className="flex flex-col gap-2">
         <p className="text-xs uppercase tracking-[0.2em] text-slate-500">
-          Our Work Environment
+          {photos.subtitle}
         </p>
         <h3 className="font-display text-3xl font-semibold text-[#0f172a]">
-          Professional spaces designed for collaboration.
+          {photos.title}
         </h3>
         <p className="text-base text-slate-600">
-          Modern conference rooms, collaborative workspaces, and state-of-the-art facilities.
+          {photos.description}
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-3">
-        <div
-          className="group relative overflow-hidden rounded-2xl shadow-[0_18px_48px_rgba(15,23,42,0.14)]"
-        >
-          <div className="relative h-[300px] bg-gradient-to-br from-slate-100 to-slate-200">
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop')] bg-cover bg-center opacity-90 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-              <h4 className="font-display text-xl font-semibold text-white mb-1">Conference Room</h4>
-              <p className="text-sm text-white/90">Client meetings and strategy sessions</p>
-            </div>
-          </div>
-        </div>
-        <div
-          className="group relative overflow-hidden rounded-2xl shadow-[0_18px_48px_rgba(15,23,42,0.14)]"
-        >
-          <div className="relative h-[300px] bg-gradient-to-br from-slate-100 to-slate-200">
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&h=400&fit=crop')] bg-cover bg-center opacity-90 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-              <h4 className="font-display text-xl font-semibold text-white mb-1">Collaborative Workspace</h4>
-              <p className="text-sm text-white/90">Team collaboration and case preparation</p>
-            </div>
-          </div>
-        </div>
-        <div
-          className="group relative overflow-hidden rounded-2xl shadow-[0_18px_48px_rgba(15,23,42,0.14)]"
-        >
-          <div className="relative h-[300px] bg-gradient-to-br from-slate-100 to-slate-200">
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=400&fit=crop')] bg-cover bg-center opacity-90 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-              <h4 className="font-display text-xl font-semibold text-white mb-1">Legal Library</h4>
-              <p className="text-sm text-white/90">Research and case study resources</p>
-            </div>
-          </div>
-        </div>
+        {photos.items.map((label) => (
+          <PhotoPlaceholder key={label} label={label} note={undefined} />
+        ))}
       </div>
     </section>
   );
@@ -419,6 +303,7 @@ function PhotoSlots() {
 
 function CTA({ onBookConsultation }: { onBookConsultation: () => void }) {
   const { t } = useTranslations();
+  const cta = t.services.cta;
 
   return (
     <section
@@ -427,18 +312,13 @@ function CTA({ onBookConsultation }: { onBookConsultation: () => void }) {
       <div className="relative grid gap-10 px-6 py-10 md:grid-cols-[1.05fr_0.95fr] md:px-12 md:py-14">
         <div className="absolute right-[-120px] top-[-80px] h-72 w-72 rounded-full bg-[#f3eadc] blur-3xl" />
         <div className="relative space-y-5">
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Next step</p>
-          <h3 className="font-display text-3xl font-semibold text-[#0f172a]">Tell us what you need this week.</h3>
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">{cta.subtitle}</p>
+          <h3 className="font-display text-3xl font-semibold text-[#0f172a]">{cta.title}</h3>
           <p className="text-base text-slate-600">
-            We respond with a short plan, budget range, and available partner times. Urgent filings get priority.
+            {cta.description}
           </p>
           <div className="grid gap-3 sm:grid-cols-2">
-            {[
-              t.contact.hero.responseUnder24h,
-              t.contact.hero.partnerLedIntake,
-              t.contact.hero.confidentialHandling,
-              "Clear next steps",
-            ].map((item) => (
+            {cta.bullets.map((item) => (
               <div
                 key={item}
                 className="flex items-center gap-3 rounded-2xl border border-[#f1e6d7] bg-[#fdfaf5] px-4 py-3 text-sm font-semibold text-[#0f172a]"
@@ -453,8 +333,8 @@ function CTA({ onBookConsultation }: { onBookConsultation: () => void }) {
           <div className="absolute inset-0 translate-x-5 translate-y-5 rounded-[28px] bg-[#e0d7c8] opacity-50 blur-3xl" />
           <div className="relative space-y-4 rounded-[28px] border border-[#f1e6d7] bg-white p-6 shadow-[0_18px_44px_rgba(15,23,42,0.1)]">
             <div>
-              <p className="text-xs uppercase tracking-[0.16em] text-slate-500">Direct line</p>
-              <h4 className="font-display text-xl font-semibold text-[#0f172a]">We prepare before we meet.</h4>
+              <p className="text-xs uppercase tracking-[0.16em] text-slate-500">{cta.subtitle}</p>
+              <h4 className="font-display text-xl font-semibold text-[#0f172a]">{t.services.hero.title}</h4>
             </div>
             <div className="space-y-2 text-sm text-slate-700">
               <div className="flex items-center gap-3 rounded-2xl bg-[#f3eadc] px-4 py-3 font-semibold text-[#8b5e2b]">
@@ -468,7 +348,7 @@ function CTA({ onBookConsultation }: { onBookConsultation: () => void }) {
               onClick={onBookConsultation}
               className="w-full rounded-full bg-[#0f172a] px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(15,23,42,0.25)] transition hover:-translate-y-px hover:shadow-[0_18px_38px_rgba(15,23,42,0.3)]"
             >
-              Request a call
+              {cta.button}
             </button>
           </div>
         </div>
@@ -476,4 +356,3 @@ function CTA({ onBookConsultation }: { onBookConsultation: () => void }) {
     </section>
   );
 }
-

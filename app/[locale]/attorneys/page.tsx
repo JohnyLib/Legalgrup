@@ -84,10 +84,10 @@ export default function AttorneysPage() {
           >
             <Suspense fallback={<div className="p-6">Loading...</div>}>
               <ScheduleCallForm
+                source={t.forms.scheduleCall.title}
                 onSubmit={(data) => {
                   console.log("Schedule call form submitted:", data);
-                  setIsScheduleCallOpen(false);
-                  alert(t.forms.scheduleCall.success);
+                  // Success handled inside the form with overlay
                 }}
               />
             </Suspense>
@@ -335,4 +335,3 @@ function AttorneyCTA({ onScheduleCall }: { onScheduleCall: () => void }) {
     </section>
   );
 }
-

@@ -58,20 +58,39 @@ export interface TranslationKeys {
       title: string;
       description: string;
       viewAllServices: string;
+      items: Array<{
+        title: string;
+        description: string;
+      }>;
     };
     results: {
       subtitle: string;
       title: string;
+      items: string[];
     };
     testimonials: {
       subtitle: string;
       title: string;
+      items: string[];
     };
     team: {
       subtitle: string;
       title: string;
       description: string;
       viewAllAttorneys: string;
+      members: Array<{
+        name: string;
+        role: string;
+        focus: string;
+      }>;
+    };
+    consultationCta: {
+      eyebrow: string;
+      title: string;
+      description: string;
+      bullets: string[];
+      lineTitle: string;
+      lineCta: string;
     };
   };
 
@@ -95,6 +114,11 @@ export interface TranslationKeys {
       description: string;
       clearSLAs: string;
       scheduleConsultation: string;
+      items: Array<{
+        title: string;
+        description: string;
+        bullets: string[];
+      }>;
     };
     programs: {
       subtitle: string;
@@ -102,6 +126,33 @@ export interface TranslationKeys {
       description: string;
       noHiddenFees: string;
       viewScopeTimeline: string;
+      list: Array<{
+        name: string;
+        badge: string;
+        price: string;
+        notes: string[];
+      }>;
+    };
+    coverage: {
+      subtitle: string;
+      title: string;
+      tags: string[];
+      availabilityLabel: string;
+      slotCta: string;
+      slots: string[];
+    };
+    photos: {
+      subtitle: string;
+      title: string;
+      description: string;
+      items: string[];
+    };
+    cta: {
+      subtitle: string;
+      title: string;
+      description: string;
+      bullets: string[];
+      button: string;
     };
   };
 
@@ -114,16 +165,40 @@ export interface TranslationKeys {
       mattersYearly: string;
       courtAppearances: string;
       avgResponse: string;
+      principles: string[];
     };
     team: {
       subtitle: string;
       title: string;
       description: string;
       directPartnerAccess: string;
+      members: Array<{
+        name: string;
+        role: string;
+        focus: string;
+        matters: string;
+      }>;
     };
     approach: {
       subtitle: string;
       title: string;
+      items: string[];
+      experienceTitle: string;
+      experienceDescription: string;
+      experienceBullets: string[];
+    };
+    photos: {
+      subtitle: string;
+      title: string;
+      description: string;
+      items: string[];
+    };
+    cta: {
+      subtitle: string;
+      title: string;
+      description: string;
+      button: string;
+      notes: string[];
     };
   };
 
@@ -241,6 +316,37 @@ export interface TranslationKeys {
       privacyAgreement: string;
       submit: string;
       success: string;
+      validation: {
+        nameRequired: string;
+        emailRequired: string;
+        emailInvalid: string;
+        phoneRequired: string;
+        matterRequired: string;
+        privacyRequired: string;
+      };
+      placeholders: {
+        fullName: string;
+        company: string;
+        email: string;
+        phone: string;
+        matterSummary: string;
+        matterType: string;
+        matterTypeOptions: {
+          corporate: string;
+          mna: string;
+          disputes: string;
+          employment: string;
+          regulatory: string;
+          private: string;
+          other: string;
+        };
+      };
+      status: {
+        submitting: string;
+        submit: string;
+        successTitle: string;
+        successClose: string;
+      };
     };
     contact: {
       title: string;
@@ -251,6 +357,23 @@ export interface TranslationKeys {
       message: string;
       submit: string;
       success: string;
+      validation: {
+        nameRequired: string;
+        emailRequired: string;
+        emailInvalid: string;
+        messageRequired: string;
+        privacyRequired: string;
+      };
+      placeholders: {
+        fullName: string;
+        email: string;
+        phone: string;
+        message: string;
+      };
+      status: {
+        sending: string;
+        submit: string;
+      };
     };
     newsletter: {
       title: string;
@@ -268,6 +391,16 @@ export interface TranslationKeys {
       problemDescriptionPlaceholder: string;
       submit: string;
       success: string;
+      validation: {
+        fullNameRequired: string;
+        phoneRequired: string;
+        problemDescriptionRequired: string;
+      };
+      status: {
+        submitting: string;
+        successTitle: string;
+        successClose: string;
+      };
     };
   };
 }
