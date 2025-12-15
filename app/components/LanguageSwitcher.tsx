@@ -20,8 +20,9 @@ export function LanguageSwitcher() {
 
   // Закрытие при клике вне компонента
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (event: Event) => {
+      const target = event.target as Node | null;
+      if (dropdownRef.current && target && !dropdownRef.current.contains(target)) {
         setIsOpen(false);
       }
     };
@@ -97,4 +98,3 @@ export function LanguageSwitcher() {
     </div>
   );
 }
-

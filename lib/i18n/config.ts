@@ -1,4 +1,5 @@
-import { Locale } from "./types";
+import type { Locale } from "./types";
+export type { Locale } from "./types";
 
 export const locales: Locale[] = ["en", "ru", "ro"];
 export const defaultLocale: Locale = "en";
@@ -14,4 +15,3 @@ export const localeFlags: Record<Locale, string> = {
   ru: "🇷🇺",
   ro: "🇷🇴",
 };
-
