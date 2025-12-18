@@ -1,6 +1,6 @@
 # LegalGrup Website
 
-**Version 1.4.1 — Google Seach Console**
+**Version 1.4.2 — Google Seach Console and sitemap.xml**
 
 Official website of **LegalGrup**, a legal services platform focused on business and corporate law.
 The project is built with **Next.js** and integrates **Bitrix24 CRM** and **Telegram** for lead management and notifications.
@@ -47,27 +47,6 @@ The project is built with **Next.js** and integrates **Bitrix24 CRM** and **Tele
 ```
 
 ---
-
-## 🔧 Environment Variables
-
-Create environment variables **(never commit them to GitHub)**.
-
-### Required variables:
-
-```env
-B24_WEBHOOK_BASE=https://yourcompany.bitrix24.ru/rest/USER_ID/WEBHOOK_KEY/
-TG_BOT_TOKEN=your_telegram_bot_token
-TG_CHAT_ID=-100XXXXXXXXXX
-```
-
-### Notes:
-
-* `B24_WEBHOOK_BASE` **must NOT include method name**
-* Telegram bot must be added to the group/channel
-* Use **Vercel → Project → Settings → Environment Variables**
-
----
-
 ## ▶️ Local Development
 
 ```bash

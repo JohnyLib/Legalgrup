@@ -30,7 +30,7 @@ export const ro: TranslationKeys = {
   },
   home: {
     topBar: {
-      phone: "Tel - +373 79021904 Coada Andrei Lawyer",
+      phone: "Tel +373 79021904 Coada Andrei",
       email: "legalgrup.md@gmail.com",
       location: "or.Cimișlia str.Sf Maria 2 of 1",
       immediateCaseReview: "Revizuire imediată a cazului",
