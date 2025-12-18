@@ -1,6 +1,6 @@
 {
   "name": "legalgrup",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,7 +12,8 @@
     "framer-motion": "^12.23.25",
     "next": "^16.0.10",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "vercel": "^50.1.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
