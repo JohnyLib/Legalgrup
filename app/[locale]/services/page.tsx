@@ -27,7 +27,7 @@ export default function ServicesPage() {
         <ServicesHero onBookConsultation={() => setIsConsultationOpen(true)} />
         <ServiceGrid />
         <Programs />
-        <PhotoSlots />
+        {/* <PhotoSlots /> */}
         <CTA onBookConsultation={() => setIsConsultationOpen(true)} />
       </PageShell>
 
@@ -148,7 +148,7 @@ function ServicesHero({ onBookConsultation }: { onBookConsultation: () => void }
                   </div>
                 ))}
               </div>
-              <div className="grid gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/80">
+              {/* <div className="grid gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/80">
                 <div className="flex items-center justify-between text-white">
                   <span className="text-xs uppercase tracking-[0.16em] text-white/70">{coverage.availabilityLabel}</span>
                   <span className="rounded-full bg-[#ffd699] px-3 py-1 text-xs font-semibold text-[#0f172a]">{coverage.slotCta}</span>
@@ -163,7 +163,7 @@ function ServicesHero({ onBookConsultation }: { onBookConsultation: () => void }
                 <button className="mt-1 inline-flex w-full items-center justify-center rounded-full bg-white px-4 py-3 text-sm font-semibold text-[#0f172a] transition hover:-translate-y-px hover:shadow-lg">
                   {coverage.slotCta}
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -213,10 +213,6 @@ function ServiceGrid() {
                 </div>
               ))}
             </div>
-            <div className="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#8b5e2b]">
-              {t.services.grid.scheduleConsultation}
-              <ArrowRightIcon className="h-4 w-4 transition group-hover:translate-x-1" />
-            </div>
           </div>
           );
         })}
@@ -263,10 +259,10 @@ function Programs() {
                 </div>
               ))}
             </div>
-            <button className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#8b5e2b] transition hover:-translate-y-px hover:shadow-md">
+            {/* <button className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#8b5e2b] transition hover:-translate-y-px hover:shadow-md">
               {t.services.programs.viewScopeTimeline}
               <ArrowRightIcon className="h-4 w-4" />
-            </button>
+            </button> */}
           </div>
         ))}
       </div>
@@ -274,32 +270,32 @@ function Programs() {
   );
 }
 
-function PhotoSlots() {
-  const { t } = useTranslations();
-  const photos = t.services.photos;
-  return (
-    <section
-      className="mt-16 space-y-8"
-    >
-      <div className="flex flex-col gap-2">
-        <p className="text-xs uppercase tracking-[0.2em] text-slate-500">
-          {photos.subtitle}
-        </p>
-        <h3 className="font-display text-3xl font-semibold text-[#0f172a]">
-          {photos.title}
-        </h3>
-        <p className="text-base text-slate-600">
-          {photos.description}
-        </p>
-      </div>
-      <div className="grid gap-6 md:grid-cols-3">
-        {photos.items.map((label) => (
-          <PhotoPlaceholder key={label} label={label} note={undefined} />
-        ))}
-      </div>
-    </section>
-  );
-}
+// function PhotoSlots() {
+//   const { t } = useTranslations();
+//   const photos = t.services.photos;
+//   return (
+//     <section
+//       className="mt-16 space-y-8"
+//     >
+//       <div className="flex flex-col gap-2">
+//         <p className="text-xs uppercase tracking-[0.2em] text-slate-500">
+//           {photos.subtitle}
+//         </p>
+//         <h3 className="font-display text-3xl font-semibold text-[#0f172a]">
+//           {photos.title}
+//         </h3>
+//         <p className="text-base text-slate-600">
+//           {photos.description}
+//         </p>
+//       </div>
+//       <div className="grid gap-6 md:grid-cols-3">
+//         {photos.items.map((label) => (
+//           <PhotoPlaceholder key={label} label={label} note={undefined} />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
 
 function CTA({ onBookConsultation }: { onBookConsultation: () => void }) {
   const { t } = useTranslations();

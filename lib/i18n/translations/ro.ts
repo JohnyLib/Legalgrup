@@ -50,15 +50,30 @@ export const ro: TranslationKeys = {
     },
     practiceAreas: {
       subtitle: "Domenii de practică",
-      title: "Consiliere concepută pentru afaceri moderne.",
-      description: "Echipe multidisciplinare care se mișcă rapid prin provocările corporative, dispute și reglementări cu un singur punct de responsabilitate.",
+      title: "Asistență juridică adaptată mediului de afaceri din Republica Moldova.",
+      description: "Echipe multidisciplinare oferă consultanță și reprezentare juridică în materie corporativă, litigii și reglementare, cu responsabilitate clară.",
       viewAllServices: "Vezi toate serviciile",
       items: [
-        { title: "Consultanță corporativă", description: "Structurare companii, consilii și contracte comerciale fără capete libere." },
-        { title: "Tranzacții & M&A", description: "Strategie de tranzacții, due diligence și playbook-uri de negociere pentru un closing ferm." },
-        { title: "Dispute & risc", description: "Echipe calme, pregătite de instanță pentru depuneri urgente, arbitraj și mediere." },
-        { title: "Muncă & oameni", description: "Politici, acorduri de leadership și investigații care protejează echipa și reputația." },
-        { title: "Reglementare & licențe", description: "Pachete de licențiere, dialog cu regulatorul și conformitate transfrontalieră." },
+        {
+          title: "Drept comercial și corporativ",
+          description: "Structurarea societăților, guvernanță corporativă și contracte comerciale.",
+        },
+        {
+          title: "Tranzacții și fuziuni",
+          description: "Asistență juridică în tranzacții, due diligence și negocierea acordurilor.",
+        },
+        {
+          title: "Litigii și managementul riscurilor",
+          description: "Reprezentare în instanță, arbitraj și soluționarea disputelor.",
+        },
+        {
+          title: "Dreptul muncii",
+          description: "Relații de muncă, contracte, politici interne și litigii de muncă.",
+        },
+        {
+          title: "Drept administrativ și licențiere",
+          description: "Relația cu autoritățile publice, licențe și conformitate juridică.",
+        },
       ],
     },
     results: {
@@ -112,44 +127,86 @@ export const ro: TranslationKeys = {
       jurisdictions: "Jurisdicții",
     },
     grid: {
-      subtitle: "Servicii principale",
-      title: "Echipe specializate, responsabilitate unică.",
-      description: "Echipele conduse de parteneri combină profunzimea corporativă, dispute și reglementări cu cicluri rapide de luare a deciziilor.",
-      clearSLAs: "SLA-uri și bugete clare",
-      scheduleConsultation: "Programați consultația",
+      subtitle: "Domenii de practică",
+      title: "Asistență juridică completă, într-un singur punct.",
+      description: "Echipe specializate oferă consultanță și reprezentare juridică adaptată legislației Republicii Moldova.",
+      clearSLAs: "Termeni clari și transparență",
+      scheduleConsultation: "Programează o consultație",
       items: [
         {
-          title: "Consultanță corporativă",
-          description: "Structurare companii, consilii și contracte comerciale fără capete libere.",
-          bullets: ["Guvernanță, materiale de board, delegări", "Contracte comerciale cu execuție rapidă", "Hartă de risc pentru piețe noi"],
+          title: "Drept comercial",
+          description: "Consultanță și asistență juridică pentru afaceri și activități comerciale.",
+          bullets: [
+            "Înființarea și restructurarea întreprinderilor",
+            "Recuperarea creanțelor",
+            "Litigii comerciale și proceduri de insolvabilitate",
+          ],
         },
         {
-          title: "Tranzacții & M&A",
-          description: "Strategie de tranzacții, due diligence și playbook-uri de negociere.",
-          bullets: ["Term sheet, SPA/SSA și condiții", "Pregătire dataroom și Q&A", "Liste de închidere și cameră de semnare"],
+          title: "Drept civil",
+          description: "Asistență juridică și reprezentare în raporturi civile.",
+          bullets: [
+            "Reprezentare în fața instanțelor și autorităților",
+            "Redactare, verificare și negociere contracte",
+            "Succesiuni și partaj",
+          ],
         },
         {
-          title: "Dispute & risc",
-          description: "Echipe calme, pregătite de instanță pentru depuneri urgente, arbitraj și mediere.",
-          bullets: ["Măsuri urgente și depuneri", "Probe, experți, pregătire martori", "Negocieri și mediere"],
+          title: "Dreptul familiei",
+          description: "Soluții juridice pentru raporturi de familie și protecția interesului copilului.",
+          bullets: [
+            "Divorț și partaj",
+            "Divorț pentru cetățeni stabiliți în străinătate",
+            "Cauze privind minorii",
+          ],
         },
         {
-          title: "Muncă & oameni",
-          description: "Politici, acorduri de leadership și investigații.",
-          bullets: ["Contracte de angajare și leadership", "Politici, audituri și conformitate", "Ieșiri sensibile și investigații"],
+          title: "Dreptul muncii",
+          description: "Asistență juridică în relațiile de muncă.",
+          bullets: [
+            "Consultanță pentru angajatori",
+            "Reprezentarea angajaților și sindicatelor",
+            "Litigii de muncă",
+          ],
         },
         {
-          title: "Reglementare & licențe",
-          description: "Pachete de licențiere, dialog cu regulatorul și conformitate transfrontalieră.",
-          bullets: ["Hărți reglementare și autorități", "Depuneri pentru licențe și follow-up", "Cadre pentru date și privacy"],
+          title: "Drept penal",
+          description: "Apărare și reprezentare în cauze penale.",
+          bullets: [
+            "Asistență în faza de urmărire penală",
+            "Reprezentare pe parcursul procesului penal",
+            "Redactare plângeri și acțiuni penale",
+          ],
         },
         {
-          title: "Private Client & Wealth",
-          description: "Succesiune, trusturi și structuri de protecție pentru fondatori și familii.",
-          bullets: ["Strategii de avere și moștenire", "Trusturi, testamente, guvernanță", "Continuitatea businessului de familie"],
+          title: "Drept administrativ și fiscal",
+          description: "Relația juridică cu autoritățile publice și fiscale.",
+          bullets: [
+            "Contestații și plângeri administrative",
+            "Reprezentare persoane fizice și juridice",
+            "Expertiză contabilă și fiscală",
+          ],
+        },
+        {
+          title: "Contabilitate și consultanță",
+          description: "Servicii financiar-contabile și consultanță fiscală.",
+          bullets: [
+            "Contabilitate primară, financiară și de gestiune",
+            "Salarizare și administrare personal",
+            "Consultanță fiscală și financiar-contabilă",
+          ],
+        },
+        {
+          title: "Servicii RNPM",
+          description: "Verificarea partenerilor și evaluarea riscurilor juridice.",
+          bullets: [
+            "Obținerea informațiilor din RNPM",
+            "Evaluarea riscului tranzacțiilor",
+            "Analiza partenerilor de afaceri",
+          ],
         },
       ],
-    },
+    },    
     programs: {
       subtitle: "Programe de angajare",
       title: "Alegeți modelul care se potrivește ritmului dvs.",
@@ -157,10 +214,37 @@ export const ro: TranslationKeys = {
       noHiddenFees: "Fără taxe ascunse",
       viewScopeTimeline: "Vezi domeniul și calendarul",
       list: [
-        { name: "General Counsel Desk", badge: "Lunar", price: "De la $3,800/lună", notes: ["Desk juridic săptămânal", "<48h pentru contracte", "Linie pentru fondator"] },
-        { name: "Deal Sprint", badge: "Proiect", price: "În funcție de scope", notes: ["Teză, timeline, liste", "Redlines și cameră de negociere", "Orchestrare closing"] },
-        { name: "Disputes Response", badge: "Hibrid", price: "Lunar + success fee", notes: ["Depuneri urgente în 48h", "Probe și pregătire martori", "Scenarii de soluționare"] },
-      ],
+        {
+          name: "General Counsel Desk",
+          badge: "Lunar",
+          price: "De la 5.000 MDL / lună",
+          notes: [
+            "Legal desk săptămânal",
+            "Redactare și analiză contracte în 48 ore",
+            "Linie directă cu partenerul coordonator"
+          ]
+        },
+        {
+          name: "Deal Sprint",
+          badge: "Proiect",
+          price: "În funcție de volum și complexitate",
+          notes: [
+            "Poziție juridică și roadmap al proiectului",
+            "Gestionarea termenelor și negocierilor",
+            "Închiderea juridică a tranzacției"
+          ]
+        },
+        {
+          name: "Disputes Response",
+          badge: "Hibrid",
+          price: "Lunar + onorariu de succes",
+          notes: [
+            "Acțiuni procedurale urgente în 48 ore",
+            "Constituirea probelor",
+            "Strategii de soluționare și apărare în litigii"
+          ]
+        }
+      ],      
     },
     coverage: {
       subtitle: "Acoperire",

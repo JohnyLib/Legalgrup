@@ -50,29 +50,29 @@ export const en: TranslationKeys = {
     },
     practiceAreas: {
       subtitle: "Practice areas",
-      title: "Counsel designed for modern businesses.",
-      description: "Multidisciplinary teams that move quickly across corporate, dispute, and regulatory challenges with a single point of accountability.",
+      title: "Legal counsel tailored to businesses in the Republic of Moldova.",
+      description: "Multidisciplinary teams provide legal advice and representation across corporate, dispute, and regulatory matters with clear accountability.",
       viewAllServices: "View all services",
       items: [
         {
-          title: "Corporate Advisory",
-          description: "Company structuring, boards, and commercial contracts that keep momentum without loose ends.",
+          title: "Commercial & Corporate Law",
+          description: "Company structuring, corporate governance, and commercial contracts.",
         },
         {
-          title: "Transactions & M&A",
-          description: "Deal strategy, diligence, and negotiation playbooks to close decisively.",
+          title: "Transactions & Mergers",
+          description: "Legal support for transactions, due diligence, and negotiations.",
         },
         {
-          title: "Disputes & Risk",
-          description: "Calm, courtroom-ready teams for urgent filings, arbitration, and settlement design.",
+          title: "Litigation & Risk",
+          description: "Court representation, arbitration, and dispute resolution.",
         },
         {
-          title: "Employment & People",
-          description: "Policies, leadership agreements, and investigations that protect teams and reputation.",
+          title: "Employment Law",
+          description: "Employment relations, contracts, internal policies, and disputes.",
         },
         {
-          title: "Regulatory & Licensing",
-          description: "Licensing packs, regulator dialogue, and cross-border compliance built with clarity.",
+          title: "Administrative Law & Licensing",
+          description: "Interaction with public authorities, licensing, and compliance.",
         },
       ],
     },
@@ -132,68 +132,86 @@ export const en: TranslationKeys = {
       jurisdictions: "Jurisdictions",
     },
     grid: {
-      subtitle: "Service pillars",
-      title: "Specialized teams, single accountability.",
-      description: "Partner-led pods combine corporate, disputes, and regulatory depth with fast decision cycles.",
-      clearSLAs: "Clear SLAs & budgets",
-      scheduleConsultation: "Schedule consultation",
+      subtitle: "Practice areas",
+      title: "Comprehensive legal services under one roof.",
+      description: "Specialized teams provide legal advice and representation under the laws of the Republic of Moldova.",
+      clearSLAs: "Clear terms & transparency",
+      scheduleConsultation: "Schedule a consultation",
       items: [
         {
-          title: "Corporate Advisory",
-          description: "Company structuring, boards, and commercial contracts that keep momentum without loose ends.",
+          title: "Commercial Law",
+          description: "Legal support for business and commercial activities.",
           bullets: [
-            "Governance, board packs, and delegations",
-            "Commercial contracts with fast turnaround",
-            "Risk mapping for new markets",
+            "Company formation and restructuring",
+            "Debt recovery",
+            "Commercial disputes and insolvency",
           ],
         },
         {
-          title: "Transactions & M&A",
-          description: "Deal strategy, diligence, and negotiation playbooks to close decisively.",
+          title: "Civil Law",
+          description: "Legal assistance in civil matters.",
           bullets: [
-            "Term sheets, SPA/SSA, and conditions",
-            "Dataroom prep and Q&A sweeps",
-            "Closing checklists and signing room",
+            "Court and authority representation",
+            "Contract drafting, review, and negotiation",
+            "Inheritance matters",
           ],
         },
         {
-          title: "Disputes & Risk",
-          description: "Calm, courtroom-ready teams for urgent filings, arbitration, and settlement design.",
+          title: "Family Law",
+          description: "Legal solutions for family-related matters.",
           bullets: [
-            "Emergency relief and filings",
-            "Evidence, experts, and witness prep",
-            "Negotiation and mediated outcomes",
+            "Divorce and property division",
+            "Divorce for citizens residing abroad",
+            "Cases involving minors",
           ],
         },
         {
-          title: "Employment & People",
-          description: "Policies, leadership agreements, and investigations that protect teams and reputation.",
+          title: "Employment Law",
+          description: "Legal services in employment relations.",
           bullets: [
-            "Hiring and leadership contracts",
-            "Policies, audits, and compliance",
-            "Sensitive exits and investigations",
+            "Advisory for employers",
+            "Representation of employees and unions",
+            "Employment disputes",
           ],
         },
         {
-          title: "Regulatory & Licensing",
-          description: "Licensing packs, regulator dialogue, and cross-border compliance built with clarity.",
+          title: "Criminal Law",
+          description: "Defense and representation in criminal cases.",
           bullets: [
-            "Regulatory mapping and authorities",
-            "Licensing submissions and follow-ups",
-            "Data and privacy frameworks",
+            "Legal assistance during criminal investigation",
+            "Court representation",
+            "Drafting criminal complaints and actions",
           ],
         },
         {
-          title: "Private Client & Wealth",
-          description: "Succession, trusts, and protection structures for founders and families.",
+          title: "Administrative & Tax Law",
+          description: "Legal relations with public and tax authorities.",
           bullets: [
-            "Wealth and estate strategies",
-            "Trusts, wills, and governance",
-            "Family business continuity",
+            "Administrative complaints and challenges",
+            "Representation of individuals and companies",
+            "Accounting and tax expertise",
+          ],
+        },
+        {
+          title: "Accounting & Consulting",
+          description: "Accounting services and financial consulting.",
+          bullets: [
+            "Primary, financial, and management accounting",
+            "Payroll and HR services",
+            "Tax and financial consulting",
+          ],
+        },
+        {
+          title: "RNPM Services",
+          description: "Counterparty checks and transaction risk assessment.",
+          bullets: [
+            "Obtaining RNPM information",
+            "Transaction risk evaluation",
+            "Business partner verification",
           ],
         },
       ],
-    },
+    },    
     programs: {
       subtitle: "Engagement programs",
       title: "Choose the model that fits your momentum.",
@@ -204,21 +222,33 @@ export const en: TranslationKeys = {
         {
           name: "General Counsel Desk",
           badge: "Monthly",
-          price: "From $3,800/mo",
-          notes: ["Weekly legal desk", "<48h contract turnaround", "Founder hotline"],
+          price: "From 5,000 MDL / month",
+          notes: [
+            "Weekly legal desk",
+            "Contract drafting & review within 48h",
+            "Direct access to managing partner"
+          ]
         },
         {
           name: "Deal Sprint",
           badge: "Project",
-          price: "Scope-based",
-          notes: ["Thesis, timeline, and checklists", "Redlines and negotiation room", "Closing orchestration"],
+          price: "Based on scope and complexity",
+          notes: [
+            "Legal position and project roadmap",
+            "Deadline control and negotiation support",
+            "Legal closing of the transaction"
+          ]
         },
         {
           name: "Disputes Response",
           badge: "Hybrid",
-          price: "Monthly + success",
-          notes: ["Emergency filings in 48h", "Evidence and witness prep", "Settlement scenarios"],
-        },
+          price: "Monthly + success fee",
+          notes: [
+            "Urgent procedural actions within 48h",
+            "Evidence building",
+            "Litigation and settlement strategies"
+          ]
+        }
       ],
     },
     coverage: {

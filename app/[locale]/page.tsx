@@ -28,7 +28,7 @@ export default function HomePage() {
         <Hero onBookConsultation={() => setIsConsultationOpen(true)} />
         <PracticeAreas />
         <ResultsAndTestimonials />
-        <TeamSection />
+        {/* <TeamSection /> */}
         <ConsultationCTA onBookConsultation={() => setIsConsultationOpen(true)} />
       </PageShell>
 
@@ -92,9 +92,9 @@ function Hero({ onBookConsultation }: { onBookConsultation: () => void }) {
           </div>
           <div className="grid gap-4 sm:grid-cols-4">
             {[
-              { label: t.home.hero.retainedClients, value: "400+" },
+              { label: t.home.hero.retainedClients, value: "200+" },
               { label: t.home.hero.responseUnder24Hours, value: "24h" },
-              { label: t.home.hero.yearsExperience, value: "15+" },
+              { label: t.home.hero.yearsExperience, value: "10+" },
               { label: t.home.hero.mattersResolved, value: "1200+" },
             ].map((stat) => (
               <div
@@ -206,10 +206,10 @@ function PracticeAreas() {
             </div>
             <h3 className="relative mt-5 font-display text-xl font-semibold text-[#0f172a]">{area.title}</h3>
             <p className="relative mt-2 text-sm leading-6 text-slate-600">{area.description}</p>
-            <div className="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#8b5e2b]">
+            {/* <div className="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#8b5e2b]">
               {t.common.readMore}
               <ArrowRightIcon className="h-4 w-4 transition group-hover:translate-x-1" />
-            </div>
+            </div> */}
           </div>
         );
         })}
@@ -253,55 +253,55 @@ function ResultsAndTestimonials() {
   );
 }
 
-function TeamSection() {
-  const { t } = useTranslations();
+// function TeamSection() {
+//   const { t } = useTranslations();
 
-  return (
-    <section
-      className="mt-16 space-y-8"
-    >
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div className="space-y-2">
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">{t.home.team.subtitle}</p>
-          <h2 className="font-display text-3xl font-semibold text-[#0f172a]">{t.home.team.title}</h2>
-          <p className="text-base text-slate-600 md:max-w-2xl">
-            {t.home.team.description}
-          </p>
-        </div>
-        <LocalizedLink
-          href="/attorneys"
-          className="inline-flex items-center gap-2 rounded-full bg-[#f3eadc] px-4 py-2 text-sm font-semibold text-[#8b5e2b] transition hover:-translate-y-px hover:shadow-md"
-        >
-          {t.home.team.viewAllAttorneys}
-          <ArrowRightIcon className="h-4 w-4" />
-        </LocalizedLink>
-      </div>
-      <div className="grid gap-6 md:grid-cols-3">
-        {[
-          { name: "Adrian Santoso", role: "Managing Partner", focus: "Corporate, M&A, board governance" },
-          { name: "Mira Lestari", role: "Partner", focus: "Disputes, arbitration, crisis response" },
-          { name: "Davin Lee", role: "Partner", focus: "Employment, investigations, compliance" },
-        ].map((attorney) => (
-          <div
-            key={attorney.name}
-            className="flex h-full flex-col rounded-2xl border border-[#efe5d4] bg-white p-6 shadow-sm"
-          >
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0f172a] text-lg font-semibold text-white">
-                {attorney.name[0]}
-              </div>
-              <div>
-                <h3 className="font-display text-xl font-semibold text-[#0f172a]">{attorney.name}</h3>
-                <p className="text-sm text-slate-600">{attorney.role}</p>
-              </div>
-            </div>
-            <p className="mt-3 text-sm leading-6 text-slate-700">{attorney.focus}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+//   return (
+//     <section
+//       className="mt-16 space-y-8"
+//     >
+//       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+//         <div className="space-y-2">
+//           <p className="text-xs uppercase tracking-[0.2em] text-slate-500">{t.home.team.subtitle}</p>
+//           <h2 className="font-display text-3xl font-semibold text-[#0f172a]">{t.home.team.title}</h2>
+//           <p className="text-base text-slate-600 md:max-w-2xl">
+//             {t.home.team.description}
+//           </p>
+//         </div>
+//         <LocalizedLink
+//           href="/attorneys"
+//           className="inline-flex items-center gap-2 rounded-full bg-[#f3eadc] px-4 py-2 text-sm font-semibold text-[#8b5e2b] transition hover:-translate-y-px hover:shadow-md"
+//         >
+//           {t.home.team.viewAllAttorneys}
+//           <ArrowRightIcon className="h-4 w-4" />
+//         </LocalizedLink>
+//       </div>
+//       <div className="grid gap-6 md:grid-cols-3">
+//         {[
+//           { name: "Adrian Santoso", role: "Managing Partner", focus: "Corporate, M&A, board governance" },
+//           { name: "Mira Lestari", role: "Partner", focus: "Disputes, arbitration, crisis response" },
+//           { name: "Davin Lee", role: "Partner", focus: "Employment, investigations, compliance" },
+//         ].map((attorney) => (
+//           <div
+//             key={attorney.name}
+//             className="flex h-full flex-col rounded-2xl border border-[#efe5d4] bg-white p-6 shadow-sm"
+//           >
+//             <div className="flex items-center gap-3">
+//               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0f172a] text-lg font-semibold text-white">
+//                 {attorney.name[0]}
+//               </div>
+//               <div>
+//                 <h3 className="font-display text-xl font-semibold text-[#0f172a]">{attorney.name}</h3>
+//                 <p className="text-sm text-slate-600">{attorney.role}</p>
+//               </div>
+//             </div>
+//             <p className="mt-3 text-sm leading-6 text-slate-700">{attorney.focus}</p>
+//           </div>
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
 
 function ConsultationCTA({ onBookConsultation }: { onBookConsultation: () => void }) {
   const { t } = useTranslations();
