@@ -135,8 +135,6 @@ export function Navigation({ onScheduleCall }: { onScheduleCall?: () => void }) 
   const links = [
     { label: t.nav.home, path: "/" },
     { label: t.nav.services, path: "/services" },
-    { label: t.nav.attorneys, path: "/attorneys" },
-    { label: t.nav.insights, path: "/insights" },
     { label: t.nav.contact, path: "/contact" },
   ];
 
