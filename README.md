@@ -1,6 +1,6 @@
 # LegalGrup Website
 
-**Version 1.3 — Telegram + Bitrix24 Integration**
+**Version 1.4.1 — Google Seach console**
 
 Official website of **LegalGrup**, a legal services platform focused on business and corporate law.
 The project is built with **Next.js** and integrates **Bitrix24 CRM** and **Telegram** for lead management and notifications.
