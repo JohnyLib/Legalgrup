@@ -65,17 +65,17 @@ export function Modal({ isOpen, onClose, children, title, size = "md" }: ModalPr
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", duration: 0.3 }}
               onClick={(e) => e.stopPropagation()}
-              className={`relative w-full ${sizeClasses[size]} max-h-[90vh] overflow-hidden rounded-[32px] border border-[#efe5d4] bg-white shadow-[0_22px_60px_rgba(15,23,42,0.25)]`}
+              className={`relative w-full ${sizeClasses[size]} max-h-[90vh] overflow-hidden rounded-[32px] border border-[#1f2a44] bg-gradient-to-br from-[#0b1221] to-[#0f172a] text-slate-100 shadow-[0_28px_80px_rgba(0,0,0,0.55)] ring-1 ring-black/30`}
             >
               {title && (
-                <div className="border-b border-[#efe5d4] bg-[#fdfaf5] px-6 py-4">
+                <div className="border-b border-[#1f2a44] bg-white/5 px-6 py-4 backdrop-blur">
                   <div className="flex items-center justify-between">
-                    <h2 className="font-display text-2xl font-semibold text-[#0f172a]">
+                    <h2 className="font-display text-2xl font-semibold text-slate-100">
                       {title}
                     </h2>
                     <button
                       onClick={onClose}
-                      className="rounded-full p-2 text-slate-500 transition hover:bg-white hover:text-slate-700"
+                      className="rounded-full p-2 text-slate-300 transition hover:bg-white/10 hover:text-white"
                       aria-label="Close modal"
                     >
                       <svg
@@ -95,7 +95,7 @@ export function Modal({ isOpen, onClose, children, title, size = "md" }: ModalPr
                   </div>
                 </div>
               )}
-              <div className="max-h-[calc(90vh-80px)] overflow-y-auto p-6">
+              <div className="max-h-[calc(90vh-80px)] overflow-y-auto bg-gradient-to-b from-white/5 via-transparent to-white/5 p-6">
                 {children}
               </div>
             </motion.div>

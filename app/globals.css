@@ -1,8 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6f3ed;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --muted: #475569;
+  --border: #efe5d4;
+  --accent: #f4c86c;
+  --accent-2: #6ce7d6;
+  --app-bg: radial-gradient(circle at 20% 20%, #f3e7d3 0, transparent 32%),
+    radial-gradient(circle at 80% 0%, #d6e3ff 0, transparent 30%),
+    #f6f3ed;
+}
+
+[data-theme="dark"] {
+  --background: #05070f;
+  --foreground: #e6ecff;
+  --surface: #0c1324;
+  --muted: #9fb0d6;
+  --border: #1f2a44;
+  --accent: #f4c86c;
+  --accent-2: #6ce7d6;
+  --app-bg: radial-gradient(circle at 20% 20%, #0b1430 0, transparent 32%),
+    radial-gradient(circle at 80% 0%, #0b1a33 0, transparent 30%),
+    #05070f;
 }
 
 @theme inline {
@@ -12,17 +33,15 @@
   --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
+  background: var(--app-bg);
   color: var(--foreground);
   font-family: var(--font-body), system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: #ffffff;
 }
 
 .font-display {

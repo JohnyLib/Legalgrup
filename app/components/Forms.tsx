@@ -44,29 +44,29 @@ function SuccessOverlay({ onClose, title, text }: { onClose: () => void; title: 
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="absolute inset-0 z-10 flex items-center justify-center bg-white/80 backdrop-blur"
+      className="absolute inset-0 z-10 flex items-center justify-center bg-black/70 backdrop-blur"
     >
       <motion.div
         initial={{ scale: 0.96, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 240, damping: 18 }}
-        className="w-full max-w-sm rounded-2xl border border-emerald-200 bg-white p-6 shadow-2xl"
+        transition={{ type: 'spring', stiffness: 240, damping: 18 }}
+        className="w-full max-w-sm rounded-2xl border border-[#1f2a44] bg-gradient-to-br from-[#0b1221] to-[#0f172a] p-6 text-slate-100 shadow-2xl shadow-black/40"
       >
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent)]/15 text-[var(--accent)] ring-1 ring-[var(--accent)]/40">
           <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
         <div className="mt-4 text-center">
-          <div className="text-lg font-semibold text-slate-900">{title}</div>
-          <div className="mt-2 text-sm text-slate-700">{text}</div>
+          <div className="text-lg font-semibold text-slate-100">{title}</div>
+          <div className="mt-2 text-sm text-slate-200">{text}</div>
         </div>
         <button
           type="button"
           onClick={onClose}
-          className="mt-6 w-full rounded-xl bg-[#0f172a] px-4 py-2 text-sm font-semibold text-white shadow hover:-translate-y-[1px] hover:shadow-md transition"
+          className="mt-6 w-full rounded-xl bg-gradient-to-r from-[var(--accent)] to-[#f59e0b] px-4 py-2 text-sm font-semibold text-[#0b0f1c] shadow hover:-translate-y-[1px] hover:shadow-[0_12px_30px_rgba(244,200,108,0.45)] transition"
         >
-          Закрыть
+          Close
         </button>
       </motion.div>
     </motion.div>
@@ -214,14 +214,14 @@ export function ConsultationForm({ onSubmit, source }: ConsultationFormProps) {
 
       <div>
         <label className="block text-sm mb-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">
+          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-300">
             Matter Type
           </span>
           <select
             name="urgency"
             value={formData.urgency}
             onChange={handleChange}
-            className="mt-2 w-full rounded-2xl border border-[#e5d8c7] bg-[#fdfaf5] px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-[#d2b78f] focus:ring-2 focus:ring-[#d2b78f]/30"
+            className="mt-2 w-full rounded-2xl border border-[#1f2a44] bg-[#0f172a] px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-[var(--accent)]/70 focus:ring-2 focus:ring-[var(--accent)]/30"
           >
             <option value="">Select matter type</option>
             <option value="corporate">Corporate & Commercial</option>
@@ -237,7 +237,7 @@ export function ConsultationForm({ onSubmit, source }: ConsultationFormProps) {
 
       <div>
         <label className="block text-sm">
-          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">
+          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-300">
             Matter Summary
           </span>
           <textarea
@@ -247,11 +247,11 @@ export function ConsultationForm({ onSubmit, source }: ConsultationFormProps) {
             rows={5}
             placeholder="Please describe your legal matter, timeline, and desired outcome..."
             className={`mt-2 w-full rounded-2xl border ${
-              errors.matter ? "border-red-300" : "border-[#e5d8c7]"
-            } bg-[#fdfaf5] px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-[#d2b78f] focus:ring-2 focus:ring-[#d2b78f]/30`}
+              errors.matter ? "border-red-400" : "border-[#1f2a44]"
+            } bg-[#0f172a] px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-[var(--accent)]/70 focus:ring-2 focus:ring-[var(--accent)]/30`}
           />
           {errors.matter && (
-            <p className="mt-1 text-xs text-red-600">{errors.matter}</p>
+            <p className="mt-1 text-xs text-red-400">{errors.matter}</p>
           )}
         </label>
       </div>
@@ -262,16 +262,16 @@ export function ConsultationForm({ onSubmit, source }: ConsultationFormProps) {
           name="privacy"
           checked={formData.privacy}
           onChange={handleChange}
-          className="mt-1 h-4 w-4 rounded border-[#d9c7af] text-[#8b5e2b] focus:ring-[#8b5e2b]"
+          className="mt-1 h-4 w-4 rounded border-[#1f2a44] bg-[#0f172a] text-[var(--accent)] focus:ring-[var(--accent)] focus:ring-offset-0"
         />
-        <label className="text-sm text-slate-700">
+        <label className="text-sm text-slate-200">
           I agree to the{" "}
-          <a href="#" className="text-[#8b5e2b] hover:underline">
+          <a href="#" className="text-[var(--accent)] hover:underline">
             privacy policy
           </a>{" "}
           and consent to being contacted by LegalGrup.
           {errors.privacy && (
-            <span className="block mt-1 text-xs text-red-600">{errors.privacy}</span>
+            <span className="block mt-1 text-xs text-red-400">{errors.privacy}</span>
           )}
         </label>
       </div>
@@ -280,13 +280,13 @@ export function ConsultationForm({ onSubmit, source }: ConsultationFormProps) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="flex-1 rounded-full bg-[#0f172a] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(15,23,42,0.25)] transition hover:-translate-y-[1px] hover:shadow-[0_18px_38px_rgba(15,23,42,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 rounded-full bg-gradient-to-r from-[var(--accent)] to-[#f59e0b] px-6 py-3 text-sm font-semibold text-[#0b0f1c] shadow-[0_14px_30px_rgba(244,200,108,0.35)] transition hover:-translate-y-[1px] hover:shadow-[0_18px_38px_rgba(244,200,108,0.45)] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? "Submitting..." : "Submit Request"}
         </button>
       </div>
       {status?.type === "error" && (
-        <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+        <div className="mt-4 rounded-xl border border-red-500/40 bg-red-900/40 px-4 py-3 text-sm text-red-100">
           {status.text}
         </div>
       )}
@@ -405,7 +405,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
 
       <div>
         <label className="block text-sm">
-          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">
+          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-300">
             Message
           </span>
           <textarea
@@ -415,11 +415,11 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
             rows={5}
             placeholder="How can we help you?"
             className={`mt-2 w-full rounded-2xl border ${
-              errors.message ? "border-red-300" : "border-[#e5d8c7]"
-            } bg-[#fdfaf5] px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-[#d2b78f] focus:ring-2 focus:ring-[#d2b78f]/30`}
+              errors.message ? "border-red-400" : "border-[#1f2a44]"
+            } bg-[#0f172a] px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-[var(--accent)]/70 focus:ring-2 focus:ring-[var(--accent)]/30`}
           />
           {errors.message && (
-            <p className="mt-1 text-xs text-red-600">{errors.message}</p>
+            <p className="mt-1 text-xs text-red-400">{errors.message}</p>
           )}
         </label>
       </div>
@@ -430,16 +430,16 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
           name="privacy"
           checked={formData.privacy}
           onChange={handleChange}
-          className="mt-1 h-4 w-4 rounded border-[#d9c7af] text-[#8b5e2b] focus:ring-[#8b5e2b]"
+          className="mt-1 h-4 w-4 rounded border-[#1f2a44] bg-[#0f172a] text-[var(--accent)] focus:ring-[var(--accent)] focus:ring-offset-0"
         />
-        <label className="text-sm text-slate-700">
+        <label className="text-sm text-slate-200">
           I agree to the{" "}
-          <a href="#" className="text-[#8b5e2b] hover:underline">
+          <a href="#" className="text-[var(--accent)] hover:underline">
             privacy policy
           </a>
           .
           {errors.privacy && (
-            <span className="block mt-1 text-xs text-red-600">{errors.privacy}</span>
+            <span className="block mt-1 text-xs text-red-400">{errors.privacy}</span>
           )}
         </label>
       </div>
@@ -448,7 +448,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="flex-1 rounded-full bg-[#0f172a] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(15,23,42,0.25)] transition hover:-translate-y-[1px] hover:shadow-[0_18px_38px_rgba(15,23,42,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 rounded-full bg-gradient-to-r from-[var(--accent)] to-[#f59e0b] px-6 py-3 text-sm font-semibold text-[#0b0f1c] shadow-[0_14px_30px_rgba(244,200,108,0.35)] transition hover:-translate-y-[1px] hover:shadow-[0_18px_38px_rgba(244,200,108,0.45)] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? "Sending..." : "Send Message"}
         </button>
@@ -553,7 +553,7 @@ export function ScheduleCallForm({ onSubmit, source }: ScheduleCallFormProps) {
 
       <div>
         <label className="block text-sm">
-          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">
+          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-300">
             {t.forms.scheduleCall.problemDescription}
           </span>
           <textarea
@@ -563,11 +563,11 @@ export function ScheduleCallForm({ onSubmit, source }: ScheduleCallFormProps) {
             rows={5}
             placeholder={t.forms.scheduleCall.problemDescriptionPlaceholder}
             className={`mt-2 w-full rounded-2xl border ${
-              errors.problemDescription ? "border-red-300" : "border-[#e5d8c7]"
-            } bg-[#fdfaf5] px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-[#d2b78f] focus:ring-2 focus:ring-[#d2b78f]/30`}
+              errors.problemDescription ? "border-red-400" : "border-[#1f2a44]"
+            } bg-[#0f172a] px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-[var(--accent)]/70 focus:ring-2 focus:ring-[var(--accent)]/30`}
           />
           {errors.problemDescription && (
-            <p className="mt-1 text-xs text-red-600">{errors.problemDescription}</p>
+            <p className="mt-1 text-xs text-red-400">{errors.problemDescription}</p>
           )}
         </label>
       </div>
@@ -576,13 +576,13 @@ export function ScheduleCallForm({ onSubmit, source }: ScheduleCallFormProps) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="flex-1 rounded-full bg-[#0f172a] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(15,23,42,0.25)] transition hover:-translate-y-[1px] hover:shadow-[0_18px_38px_rgba(15,23,42,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 rounded-full bg-gradient-to-r from-[var(--accent)] to-[#f59e0b] px-6 py-3 text-sm font-semibold text-[#0b0f1c] shadow-[0_14px_30px_rgba(244,200,108,0.35)] transition hover:-translate-y-[1px] hover:shadow-[0_18px_38px_rgba(244,200,108,0.45)] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? "Submitting..." : t.forms.scheduleCall.submit}
         </button>
       </div>
       {status?.type === "error" && (
-        <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+        <div className="mt-4 rounded-xl border border-red-500/40 bg-red-900/40 px-4 py-3 text-sm text-red-100">
           {status.text}
         </div>
       )}

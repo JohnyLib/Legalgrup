@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import type { ReactNode, SVGProps } from "react";
+import { createContext, useContext } from "react";
 import HelpWidget from "./HelpWidget";
 import Link from "next/link";
 import { useEffect, useState, useRef, Suspense, lazy } from "react";
@@ -13,18 +14,59 @@ import { getLocaleFromPath } from "../../lib/i18n/utils";
 const Modal = lazy(() => import("./Modal").then(m => ({ default: m.Modal })));
 const ScheduleCallForm = lazy(() => import("./Forms").then(m => ({ default: m.ScheduleCallForm })));
 
+type Theme = "light" | "dark";
+
+type ThemeContextValue = {
+  theme: Theme;
+  toggleTheme: () => void;
+};
+
+const ThemeContext = createContext<ThemeContextValue>({
+  theme: "dark",
+  toggleTheme: () => undefined,
+});
+
+export function useTheme() {
+  return useContext(ThemeContext);
+}
+
 export function PageShell({ children }: { children: ReactNode }) {
   const { t } = useTranslations();
+  // Render dark on server to avoid hydration mismatches, then adjust on client.
+  const [theme, setTheme] = useState<Theme>("dark");
   const [isScheduleCallOpen, setIsScheduleCallOpen] = useState(false);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const stored = window.localStorage.getItem("theme") as Theme | null;
+    if (stored === "light" || stored === "dark") {
+      setTheme(stored);
+      document.documentElement.dataset.theme = stored;
+      return;
+    }
+    const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+    const next = prefersDark ? "dark" : "light";
+    setTheme(next);
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem("theme", next);
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+
   return (
-    <>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
     <HelpWidget />
-      <div className="min-h-screen bg-[#f6f3ed] text-slate-900">
-        <div className="pointer-events-none fixed inset-0 opacity-60">
-          <div className="absolute left-[-10%] top-[-20%] h-[360px] w-[360px] rounded-full bg-[#f0e3cd] blur-3xl" />
-          <div className="absolute right-[-8%] top-[10%] h-[320px] w-[320px] rounded-full bg-[#d6e3ff] blur-3xl" />
-          <div className="absolute bottom-[-20%] left-[20%] h-[300px] w-[520px] rounded-[999px] bg-[#e5f6f1] blur-3xl" />
+      <div className={`min-h-screen ${theme === "dark" ? "bg-gradient-to-b from-[#05070f] via-[#070d1a] to-[#05070f] text-slate-100" : "bg-[#f6f3ed] text-[#0f172a]"}`}>
+        <div className={`pointer-events-none fixed inset-0 ${theme === "dark" ? "opacity-80" : "opacity-70"}`}>
+          <div className={`absolute left-[-6%] top-[-18%] h-[360px] w-[360px] rounded-full blur-[110px] ${theme === "dark" ? "bg-[#0f1a36]" : "bg-[#f0e3cd]"}`} />
+          <div className={`absolute right-[-12%] top-[6%] h-[320px] w-[320px] rounded-full blur-[120px] ${theme === "dark" ? "bg-[#0a2336]" : "bg-[#d6e3ff]"}`} />
+          <div className={`absolute bottom-[-22%] left-[18%] h-[300px] w-[520px] rounded-[999px] blur-[120px] ${theme === "dark" ? "bg-[#0f2b2f]" : "bg-[#e5f6f1]"}`} />
         </div>
         <div className="relative">
           <TopBar />
@@ -53,7 +95,7 @@ export function PageShell({ children }: { children: ReactNode }) {
           </Modal>
         </Suspense>
       )}
-    </>
+    </ThemeContext.Provider>
   );
 }
 
@@ -65,10 +107,10 @@ export function PhotoPlaceholder({
   note?: string;
 }) {
   return (
-    <div className="relative flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-[#d8c9b3] bg-[#fdfaf5] px-4 py-8 text-center text-sm text-slate-600 shadow-inner">
-      <div className="h-16 w-16 rounded-xl border border-[#e6d7c3] bg-gradient-to-br from-white to-[#f3eadc]" />
-      <div className="font-semibold text-[#0f172a]">{label}</div>
-      {note ? <div className="text-xs text-slate-500">{note}</div> : null}
+    <div className="relative flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-[#1f2a44] bg-[#0f172a] px-4 py-8 text-center text-sm text-slate-200 shadow-inner shadow-black/20">
+      <div className="h-16 w-16 rounded-xl border border-[#1f2a44] bg-gradient-to-br from-[#0b1221] to-[#1b2a4b]" />
+      <div className="font-semibold text-slate-100">{label}</div>
+      {note ? <div className="text-xs text-slate-400">{note}</div> : null}
     </div>
   );
 }
@@ -97,26 +139,34 @@ export function ProfessionalImage({
 
 export function TopBar() {
   const { t } = useTranslations();
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   
   return (
-    <div className="border-b border-white/50 bg-[#0f172a] text-white">
+    <div
+      className={`border-b ${
+        isDark
+          ? "border-[#1f2a44] bg-gradient-to-r from-[#101a2f] via-[#0c1221] to-[#0f1d36] text-slate-100"
+          : "border-[#e8dfd4] bg-gradient-to-r from-[#0f172a] via-[#15243f] to-[#0f172a] text-white"
+      }`}
+    >
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 text-sm md:flex-row md:items-center md:justify-between">
         <div className="flex flex-wrap items-center gap-4">
-          <div className="flex items-center gap-2">
-            <PhoneIcon className="h-4 w-4 text-[#ffd699]" />
+          <div className="flex items-center gap-2 text-slate-200">
+            <PhoneIcon className="h-4 w-4 text-[var(--accent)]" />
             <span className="font-medium tracking-tight">{t.home.topBar.phone}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <MailIcon className="h-4 w-4 text-[#ffd699]" />
+          <div className="flex items-center gap-2 text-slate-200">
+            <MailIcon className="h-4 w-4 text-[var(--accent)]" />
             <span className="tracking-tight">{t.home.topBar.email}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <MapPinIcon className="h-4 w-4 text-[#ffd699]" />
+          <div className="flex items-center gap-2 text-slate-200">
+            <MapPinIcon className="h-4 w-4 text-[var(--accent)]" />
             <span className="tracking-tight">{t.home.topBar.location}</span>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <span className="hidden text-xs uppercase tracking-[0.16em] text-white/70 md:block">
+          <span className="hidden text-xs uppercase tracking-[0.16em] text-slate-300 md:block">
             {t.home.topBar.immediateCaseReview}
           </span>
         </div>
@@ -129,6 +179,7 @@ export function Navigation({ onScheduleCall }: { onScheduleCall?: () => void }) 
   const { t } = useTranslations();
   const router = useRouter();
   const pathname = usePathname();
+  const { theme, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   
@@ -185,22 +236,32 @@ export function Navigation({ onScheduleCall }: { onScheduleCall?: () => void }) 
 
   return (
     <>
-      <header className="sticky top-0 z-30 border-b border-[#e8dfd4] bg-white/80 backdrop-blur">
+      <header
+        className={`sticky top-0 z-30 border-b backdrop-blur ${
+          theme === "dark"
+            ? "border-[#1f2a44] bg-[#0b1221]/80"
+            : "border-[#e8dfd4] bg-white/85"
+        }`}
+      >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
             <LocalizedLink href="/" className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0f172a] to-[#1b2740] text-lg font-semibold text-white shadow-lg">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#101b36] to-[#1f2f52] text-lg font-semibold text-white shadow-lg ring-1 ring-white/10">
                 LG
               </div>
               <div>
-                <div className="font-display text-xl font-semibold tracking-tight text-[#0f172a]">
+                <div className="font-display text-xl font-semibold tracking-tight text-slate-100">
                   LegalGrup
                 </div>
-                <p className="text-xs text-slate-500">Attorneys & Partners</p>
+                <p className="text-xs text-slate-400">Attorneys & Partners</p>
               </div>
             </LocalizedLink>
           </div>
-          <nav className="hidden items-center gap-8 text-sm font-medium text-slate-700 md:flex">
+          <nav
+            className={`hidden items-center gap-8 text-sm font-medium ${
+              theme === "dark" ? "text-slate-200" : "text-slate-700"
+            } md:flex`}
+          >
             {links.map((link) => {
               const isActive = currentPath === link.path;
               return (
@@ -208,10 +269,10 @@ export function Navigation({ onScheduleCall }: { onScheduleCall?: () => void }) 
                   key={link.path}
                   href={link.path}
                   prefetch={true}
-                  className={`relative pb-1 transition hover:text-[#8b5e2b] ${isActive ? "text-[#8b5e2b]" : ""}`}
+                  className={`relative pb-1 transition hover:text-[var(--accent)] ${isActive ? "text-[var(--accent)]" : ""}`}
                 >
                   {link.label}
-                  <span className={`absolute bottom-0 left-0 right-0 h-[2px] origin-left bg-[#8b5e2b] transition-transform duration-200 ease-out ${isActive ? "scale-x-100" : "scale-x-0 hover:scale-x-100"}`} />
+                  <span className={`absolute bottom-0 left-0 right-0 h-[2px] origin-left bg-[var(--accent)] transition-transform duration-200 ease-out ${isActive ? "scale-x-100" : "scale-x-0 hover:scale-x-100"}`} />
                 </LocalizedLink>
               );
             })}
@@ -219,21 +280,28 @@ export function Navigation({ onScheduleCall }: { onScheduleCall?: () => void }) 
           <div className="flex items-center gap-3">
             <button 
               onClick={onScheduleCall}
-              className="hidden rounded-full bg-[#0f172a] px-4 py-2 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(15,23,42,0.25)] transition hover:-translate-y-px hover:shadow-[0_18px_38px_rgba(15,23,42,0.30)] md:inline-flex"
+              className="hidden rounded-full bg-gradient-to-r from-[var(--accent)] to-[#f59e0b] px-4 py-2 text-sm font-semibold text-[#0b0f1c] shadow-[0_10px_30px_rgba(244,200,108,0.35)] transition hover:-translate-y-px hover:shadow-[0_14px_36px_rgba(244,200,108,0.45)] md:inline-flex"
             >
               {t.nav.scheduleCall}
+            </button>
+            <button
+              onClick={toggleTheme}
+              className="hidden h-10 w-10 items-center justify-center rounded-full bg-white/5 text-sm font-semibold text-slate-200 ring-1 ring-[#1f2a44] transition hover:-translate-y-px hover:ring-[var(--accent)] md:inline-flex"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? "☀️" : "🌙"}
             </button>
             <LanguageSwitcher />
             {/* Бургер меню кнопка */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg transition hover:bg-[#fdfaf5] active:scale-95"
+              className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg transition hover:bg-white/5 active:scale-95"
               aria-label="Toggle menu"
               aria-expanded={isMobileMenuOpen}
             >
-              <span className={`block h-0.5 w-6 bg-[#8b5e2b] transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`} />
-              <span className={`block h-0.5 w-6 bg-[#8b5e2b] transition-all duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`} />
-              <span className={`block h-0.5 w-6 bg-[#8b5e2b] transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+              <span className={`block h-0.5 w-6 bg-[var(--accent)] transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`} />
+              <span className={`block h-0.5 w-6 bg-[var(--accent)] transition-all duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`} />
+              <span className={`block h-0.5 w-6 bg-[var(--accent)] transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
             </button>
           </div>
         </div>
@@ -248,12 +316,12 @@ export function Navigation({ onScheduleCall }: { onScheduleCall?: () => void }) 
       >
         {/* Overlay */}
         <div 
-          className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/40 backdrop-blur-sm"
           onClick={() => setIsMobileMenuOpen(false)}
         />
         
         {/* Меню панель */}
-        <div className={`absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transition-transform duration-300 ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
+        <div className={`absolute right-0 top-0 h-full w-80 max-w-[85vw] ${theme === "dark" ? "bg-[#0d1526] ring-[#1f2a44]" : "bg-white ring-[#e8dfd4]"} shadow-2xl shadow-black/20 ring-1 transition-transform duration-300 ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
           <div className="flex flex-col h-full">
             {/* Навигационные ссылки */}
             <nav className="flex flex-col p-6 gap-2">
@@ -266,8 +334,12 @@ export function Navigation({ onScheduleCall }: { onScheduleCall?: () => void }) 
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`px-4 py-3 rounded-xl text-base font-medium transition ${
                       isActive
-                        ? "bg-[#fdfaf5] text-[#8b5e2b] border border-[#e6d7c3]"
-                        : "text-slate-700 hover:bg-[#fdfaf5] active:bg-[#f5ede0]"
+                        ? theme === "dark"
+                          ? "bg-white/5 text-[var(--accent)] border border-[#1f2a44]"
+                          : "bg-[#fdfaf5] text-[#8b5e2b] border border-[#e8dfd4]"
+                        : theme === "dark"
+                          ? "text-slate-200 hover:bg-white/5 active:bg-white/10"
+                          : "text-slate-700 hover:bg-[#fdfaf5] active:bg-[#f5ede0]"
                     }`}
                   >
                     {link.label}
@@ -277,13 +349,19 @@ export function Navigation({ onScheduleCall }: { onScheduleCall?: () => void }) 
             </nav>
             
             {/* Кнопки действий */}
-            <div className="mt-auto p-6 border-t border-[#e8dfd4] space-y-3">
+            <div className={`mt-auto p-6 space-y-3 border-t ${theme === "dark" ? "border-[#1f2a44]" : "border-[#e8dfd4]"}`}>
+              <button
+                onClick={toggleTheme}
+                className="w-full rounded-full bg-white/5 px-4 py-3 text-sm font-semibold text-slate-200 ring-1 ring-[#1f2a44] transition active:scale-95"
+              >
+                {theme === "dark" ? "Switch to light" : "Switch to dark"}
+              </button>
               <button 
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   onScheduleCall?.();
                 }}
-                className="w-full rounded-full bg-[#0f172a] px-4 py-3 text-sm font-semibold text-white shadow-lg transition active:scale-95"
+                className="w-full rounded-full bg-gradient-to-r from-[var(--accent)] to-[#f59e0b] px-4 py-3 text-sm font-semibold text-[#0b0f1c] shadow-lg transition active:scale-95"
               >
                 {t.nav.scheduleCall}
               </button>
@@ -314,7 +392,7 @@ export function Field({
 }) {
   return (
     <label className="block text-sm">
-      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">
+      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-300">
         {label}
       </span>
       <input
@@ -322,12 +400,12 @@ export function Field({
         value={value}
         onChange={onChange}
         className={`mt-2 w-full rounded-2xl border ${
-          error ? "border-red-300" : "border-[#e5d8c7]"
-        } bg-[#fdfaf5] px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-[#d2b78f] focus:ring-2 focus:ring-[#d2b78f]/30`}
+          error ? "border-red-400" : "border-[#1f2a44]"
+        } bg-[#0f172a] px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-[var(--accent)]/80 focus:ring-2 focus:ring-[var(--accent)]/30`}
         placeholder={placeholder}
         type={type}
       />
-      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+      {error && <p className="mt-1 text-xs text-red-400">{error}</p>}
     </label>
   );
 }
