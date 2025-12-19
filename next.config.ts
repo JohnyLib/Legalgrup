@@ -21,15 +21,15 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['framer-motion'],
   },
 
-  async redirects() {
-    return [
-      {
-        source: "/home",
-        destination: "/en",
-        permanent: true,
-      },
-    ];
-  },
+async redirects() {
+  return [
+    {
+      source: "/home",
+      destination: `/${process.env.NEXT_PUBLIC_DEFAULT_LOCALE || "ru"}`,
+      permanent: true,
+    },
+  ];
+},
 };
 
 export default nextConfig;
