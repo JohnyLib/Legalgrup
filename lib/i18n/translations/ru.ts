@@ -32,7 +32,7 @@ export const ru: TranslationKeys = {
     topBar: {
       phone: "Тел. +373 79021904 Coada Andrei",
       email: "legalgrup.md@gmail.com",
-      location: "or.CimiˆTlia str.Sf Maria 2 of 1",
+      location: "Chisinau, Moldova",
       immediateCaseReview: "Срочная оценка дела",
       bookConsultation: "Записаться на консультацию",
     },

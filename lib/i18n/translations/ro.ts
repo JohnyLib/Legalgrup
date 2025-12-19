@@ -399,7 +399,7 @@ export const ro: TranslationKeys = {
       partnerLedIntake: "Primire condusă de partener",
       hotline: "Linie telefonică directă",
       intake: "Primire",
-      location: "or.Cimișlia str.Sf Maria 2 of 1",
+      location: "Chisinau, Moldova",
       hybridAvailability: "Disponibilitate hibridă și la fața locului",
     },
     offices: {
